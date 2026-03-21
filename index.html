@@ -28,11 +28,18 @@
             box-sizing: border-box;
         }
 
+        /* --- Fix for Horizontal Scrolling --- */
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+            position: relative;
+        }
+
         body {
             background-color: var(--bg-dark);
             color: var(--text-primary);
             font-family: var(--font-family-sans);
-            overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
@@ -60,6 +67,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
+            width: 100%; /* Ensure container doesn't overflow */
         }
 
         .glass-card {
@@ -84,7 +92,7 @@
 
         .section-title {
             text-align: center;
-            font-size: clamp(2rem, 5vw, 2.5rem); /* Responsive Font */
+            font-size: clamp(2rem, 5vw, 2.5rem); 
             margin-bottom: 3rem;
             opacity: 0;
             transform: translateY(20px);
@@ -129,7 +137,7 @@
         }
 
         header.scrolled {
-            background: rgba(3, 5, 30, 0.9);
+            background: rgba(3, 5, 30, 0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-glass);
         }
@@ -215,11 +223,12 @@
         }
 
         .hero-text h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem); /* Responsive scaling */
+            font-size: clamp(2.2rem, 6vw, 4rem); /* Responsive scaling */
             line-height: 1.25; 
             margin-bottom: 1rem;
             letter-spacing: 1.5px; 
             font-weight: 700;
+            word-break: keep-all; /* Prevent long words from breaking layout */
         }
 
         .hero-text h1 .ser {
@@ -239,7 +248,7 @@
         .hero-btns {
             display: flex;
             gap: 1.5rem;
-            flex-wrap: wrap; /* Allows buttons to stack on very small screens */
+            flex-wrap: wrap; 
         }
 
         .hero-image-wrapper {
@@ -294,6 +303,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            white-space: nowrap; /* Keeps text in one line */
         }
 
         .metric-badge.v1 { top: 0%; right: -25%; }
@@ -527,7 +537,7 @@
             margin-bottom: 2rem;
         }
 
-        /* --- Expertise List (About Section) --- */
+        /* --- Expertise List --- */
         .expertise-list {
             margin-top: 2.5rem;
         }
@@ -672,7 +682,7 @@
             .nav-links {
                 position: fixed;
                 top: 0;
-                right: -100%; /* Hidden off-screen */
+                right: -100%; 
                 width: 75%;
                 max-width: 300px;
                 height: 100vh;
@@ -688,10 +698,10 @@
             }
 
             .nav-links.active {
-                right: 0; /* Slide in */
+                right: 0; 
             }
 
-            .contact-btn { display: none; }
+            .contact-btn.hide-on-mobile { display: none; }
 
             /* Hero Mobile */
             .hero {
@@ -701,7 +711,7 @@
                 height: auto;
                 min-height: 100vh;
                 margin-top: 100px;
-                gap: 4rem;
+                gap: 3rem;
             }
 
             .hero-text { 
@@ -713,20 +723,32 @@
 
             .hero-text p { max-width: 100%; }
 
-            /* Image resize instead of hiding on mobile */
+            /* Mobile Image Adjustments */
             .hero-image-wrapper { 
                 display: block; 
-                width: 250px; 
-                height: 250px; 
+                width: 200px; /* Reduced to stop overflow */
+                height: 200px; 
                 margin: 0 auto; 
-                opacity: 1; /* Override scroll animation for mobile to be safe */
+                opacity: 1; 
                 transform: translateX(0);
             }
 
-            .metric-badge { padding: 0.5rem 0.8rem; font-size: 0.8rem; }
-            .metric-badge.v1 { top: -10%; right: -15%; }
-            .metric-badge.v2 { bottom: -10%; left: -15%; }
-            .metric-badge.v3 { display: none; } /* Hide one badge to avoid clutter */
+            .photo-rings {
+                width: 120%; height: 120%; top: -10%; left: -10%;
+            }
+
+            .photo-rings.inner {
+                width: 110%; height: 110%; top: -5%; left: -5%;
+            }
+
+            .metric-badge { 
+                padding: 0.5rem 0.8rem; 
+                font-size: 0.75rem; 
+            }
+            /* Kept closer to the image so it doesn't push screen width */
+            .metric-badge.v1 { top: -5%; right: -15%; }
+            .metric-badge.v2 { bottom: -5%; left: -15%; }
+            .metric-badge.v3 { display: none; } 
 
             /* Layout Grids */
             .logo-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
@@ -736,16 +758,23 @@
             .about-content { grid-template-columns: 1fr; gap: 2rem; }
             
             .projects, .services, .stats, .process, .about, .cta {
-                padding: 60px 0; /* Reduce padding for smaller screens */
+                padding: 60px 0; 
             }
         }
 
         @media (max-width: 576px) {
+            .hero-text h1 {
+                font-size: 2rem; /* Ensure very small phones don't break text */
+            }
             .logo-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
             .hero-btns { flex-direction: column; width: 100%; }
             .hero-btns .btn { width: 100%; }
             .contact-form-container { padding: 1.5rem; }
+            
+            /* Extra safety for very small screens */
+            .metric-badge.v1 { top: -5%; right: -5%; }
+            .metric-badge.v2 { bottom: -5%; left: -5%; }
         }
 
         /* --- Staggered Animation Logic --- */
@@ -999,7 +1028,6 @@
     </footer>
 
     <script>
-        // 1. Hamburger Menu Logic for Mobile
         const mobileMenuBtn = document.getElementById('mobile-menu');
         const navLinksMenu = document.getElementById('nav-links');
         const menuIcon = mobileMenuBtn.querySelector('i');
@@ -1007,7 +1035,6 @@
         mobileMenuBtn.addEventListener('click', () => {
             navLinksMenu.classList.toggle('active');
             
-            // Toggle icon between bars and close (X)
             if(navLinksMenu.classList.contains('active')) {
                 menuIcon.classList.remove('fa-bars');
                 menuIcon.classList.add('fa-times');
@@ -1017,7 +1044,6 @@
             }
         });
 
-        // Close menu when a link is clicked
         const navItems = document.querySelectorAll('.nav-links a');
         navItems.forEach(item => {
             item.addEventListener('click', () => {
@@ -1027,7 +1053,6 @@
             });
         });
 
-        // 2. Intersection Observer for staggered animations on scroll
         const animatedElements = document.querySelectorAll('[data-animate-on-scroll]');
         
         const observerOptions = {
@@ -1048,41 +1073,12 @@
         const observer = new IntersectionObserver(onIntersect, observerOptions);
         animatedElements.forEach(element => observer.observe(element));
 
-        // 3. Header background change on scroll
         const header = document.getElementById('header');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 100) {
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
-            }
-        });
-
-        // 4. FAQ Accordion logic (Kept intact as requested, even if HTML isn't added yet)
-        const faqItems = document.querySelectorAll('.faq-item');
-        faqItems.forEach(item => {
-            const question = item.querySelector('.faq-question');
-            const answer = item.querySelector('.faq-answer');
-
-            if(question && answer) {
-                question.addEventListener('click', () => {
-                    // Close other items
-                    faqItems.forEach(otherItem => {
-                        if (otherItem !== item && otherItem.classList.contains('active')) {
-                            otherItem.classList.remove('active');
-                            otherItem.querySelector('.faq-answer').style.maxHeight = null;
-                        }
-                    });
-
-                    // Toggle current item
-                    const isActive = item.classList.contains('active');
-                    item.classList.toggle('active');
-                    if (!isActive) {
-                        answer.style.maxHeight = answer.scrollHeight + 'px';
-                    } else {
-                        answer.style.maxHeight = null; 
-                    }
-                });
             }
         });
     </script>

@@ -166,7 +166,7 @@
         .nav-links {
             display: flex;
             gap: 2rem;
-            align-items: center; /* Center align links horizontally */
+            align-items: center;
         }
 
         .nav-links a:hover {
@@ -518,6 +518,7 @@
         .about-photo-wrapper {
             opacity: 0;
             transform: translateX(-50px);
+            width: 100%;
         }
 
         .about-image {
@@ -681,6 +682,13 @@
 
         @media (max-width: 992px) {
             .container { padding: 0 1.5rem; }
+            .glass-card { padding: 1.5rem; } /* Reduce bulkiness on tablets/mobiles */
+            
+            /* Center and shrink the wide photo card */
+            .about-photo-wrapper {
+                max-width: 400px;
+                margin: 0 auto; 
+            }
             
             /* Navbar Mobile */
             .menu-toggle { display: block; }
@@ -746,18 +754,10 @@
                 transform: translateX(0);
             }
 
-            .photo-rings {
-                width: 120%; height: 120%; top: -10%; left: -10%;
-            }
+            .photo-rings { width: 120%; height: 120%; top: -10%; left: -10%; }
+            .photo-rings.inner { width: 110%; height: 110%; top: -5%; left: -5%; }
 
-            .photo-rings.inner {
-                width: 110%; height: 110%; top: -5%; left: -5%;
-            }
-
-            .metric-badge { 
-                padding: 0.5rem 0.8rem; 
-                font-size: 0.75rem; 
-            }
+            .metric-badge { padding: 0.5rem 0.8rem; font-size: 0.75rem; }
             .metric-badge.v1 { top: -5%; right: -15%; }
             .metric-badge.v2 { bottom: -5%; left: -15%; }
             .metric-badge.v3 { display: none; } 
@@ -775,17 +775,33 @@
         }
 
         @media (max-width: 576px) {
-            .hero-text h1 {
-                font-size: 2rem; 
-            }
+            .container { padding: 0 1.2rem; } /* Ensure nice spacing around edges */
+            .glass-card { padding: 1.2rem; } /* Shrink inner padding for small screens */
+            
+            .hero-text h1 { font-size: 2rem; }
             .logo-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+            
             .hero-btns { flex-direction: column; width: 100%; }
             .hero-btns .btn { width: 100%; }
             .contact-form-container { padding: 1.5rem; }
             
             .metric-badge.v1 { top: -5%; right: -5%; }
             .metric-badge.v2 { bottom: -5%; left: -5%; }
+            
+            /* Limit photo width on phones to leave side margins */
+            .about-photo-wrapper {
+                max-width: 320px;
+                margin: 0 auto;
+            }
+            .about-image {
+                height: 300px; /* Better ratio for smaller width */
+            }
+            
+            /* Stop project images from being too tall on phones */
+            .project-img-wrapper {
+                height: 220px; 
+            }
         }
 
         /* --- Staggered Animation Logic --- */

@@ -67,7 +67,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
-            width: 100%; /* Ensure container doesn't overflow */
+            width: 100%;
         }
 
         .glass-card {
@@ -166,6 +166,7 @@
         .nav-links {
             display: flex;
             gap: 2rem;
+            align-items: center; /* Center align links horizontally */
         }
 
         .nav-links a:hover {
@@ -191,6 +192,11 @@
             cursor: pointer;
             color: var(--text-primary);
             z-index: 1002;
+        }
+
+        /* Hide the mobile button on desktop by default */
+        .mobile-only-btn {
+            display: none; 
         }
 
         /* --- Hero --- */
@@ -223,12 +229,12 @@
         }
 
         .hero-text h1 {
-            font-size: clamp(2.2rem, 6vw, 4rem); /* Responsive scaling */
+            font-size: clamp(2.2rem, 6vw, 4rem); 
             line-height: 1.25; 
             margin-bottom: 1rem;
             letter-spacing: 1.5px; 
             font-weight: 700;
-            word-break: keep-all; /* Prevent long words from breaking layout */
+            word-break: keep-all; 
         }
 
         .hero-text h1 .ser {
@@ -303,7 +309,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            white-space: nowrap; /* Keeps text in one line */
+            white-space: nowrap; 
         }
 
         .metric-badge.v1 { top: 0%; right: -25%; }
@@ -701,7 +707,14 @@
                 right: 0; 
             }
 
+            /* Hide the main header button on mobile */
             .contact-btn.hide-on-mobile { display: none; }
+            
+            /* Show the mobile menu button */
+            .mobile-only-btn {
+                display: block; 
+                width: 100%;
+            }
 
             /* Hero Mobile */
             .hero {
@@ -726,7 +739,7 @@
             /* Mobile Image Adjustments */
             .hero-image-wrapper { 
                 display: block; 
-                width: 200px; /* Reduced to stop overflow */
+                width: 200px; 
                 height: 200px; 
                 margin: 0 auto; 
                 opacity: 1; 
@@ -745,7 +758,6 @@
                 padding: 0.5rem 0.8rem; 
                 font-size: 0.75rem; 
             }
-            /* Kept closer to the image so it doesn't push screen width */
             .metric-badge.v1 { top: -5%; right: -15%; }
             .metric-badge.v2 { bottom: -5%; left: -15%; }
             .metric-badge.v3 { display: none; } 
@@ -764,7 +776,7 @@
 
         @media (max-width: 576px) {
             .hero-text h1 {
-                font-size: 2rem; /* Ensure very small phones don't break text */
+                font-size: 2rem; 
             }
             .logo-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
@@ -772,7 +784,6 @@
             .hero-btns .btn { width: 100%; }
             .contact-form-container { padding: 1.5rem; }
             
-            /* Extra safety for very small screens */
             .metric-badge.v1 { top: -5%; right: -5%; }
             .metric-badge.v2 { bottom: -5%; left: -5%; }
         }
@@ -817,7 +828,7 @@
 
     <header id="header">
         <div class="container nav">
-            <a href="#" class="logo"><img src="assets/Logo.png" alt="CipherCore Tech Logo"> CipherCore<span class="text-accent">Tech</span></a>
+            <a href="#" class="logo"><img src="assets/Logo.png" alt="CipherCore Tech Logo"> CipherCore<span class="text-accent">.Tech</span></a>
             
             <div class="menu-toggle" id="mobile-menu">
                 <i class="fas fa-bars"></i>
@@ -829,7 +840,7 @@
                 <li><a href="#process">Process</a></li>
                 <li><a href="#about">About Me</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><a href="#contact" class="btn contact-btn" style="display: block; text-align: center; margin-top: 1rem;">Let's Talk</a></li>
+                <li class="mobile-only-btn"><a href="#contact" class="btn contact-btn" style="display: block; text-align: center; margin-top: 1rem;">Let's Talk</a></li>
             </ul>
             <a href="#contact" class="btn contact-btn hide-on-mobile">Let's Talk</a>
         </div>

@@ -66,7 +66,8 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding-left: 2rem;
+            padding-right: 2rem;
             width: 100%;
         }
 
@@ -318,7 +319,8 @@
 
         /* --- Client Logos --- */
         .client-logos {
-            padding: 60px 0;
+            padding-top: 60px;
+            padding-bottom: 60px;
             background: var(--bg-glass);
             border-top: 1px solid var(--border-glass);
             border-bottom: 1px solid var(--border-glass);
@@ -350,7 +352,8 @@
 
         /* --- Projects --- */
         .projects {
-            padding: 100px 0;
+            padding-top: 100px;
+            padding-bottom: 100px;
         }
 
         .project-grid {
@@ -407,7 +410,8 @@
 
         /* --- Services --- */
         .services {
-            padding: 100px 0;
+            padding-top: 100px;
+            padding-bottom: 100px;
             position: relative;
         }
 
@@ -445,7 +449,8 @@
 
         /* --- Stats --- */
         .stats {
-            padding: 100px 0;
+            padding-top: 100px;
+            padding-bottom: 100px;
         }
 
         .stats-grid {
@@ -472,7 +477,8 @@
 
         /* --- Process --- */
         .process {
-            padding: 100px 0;
+            padding-top: 100px;
+            padding-bottom: 100px;
         }
 
         .process-grid {
@@ -505,7 +511,8 @@
 
         /* --- About Me --- */
         .about {
-            padding: 100px 0;
+            padding-top: 100px;
+            padding-bottom: 100px;
         }
 
         .about-content {
@@ -590,7 +597,8 @@
 
         /* --- CTA Section --- */
         .cta {
-            padding: 100px 0;
+            padding-top: 100px;
+            padding-bottom: 100px;
             background: var(--bg-glass);
             border-top: 1px solid var(--border-glass);
             text-align: center;
@@ -650,7 +658,8 @@
 
         /* --- Footer --- */
         footer {
-            padding: 60px 0 30px;
+            padding-top: 60px;
+            padding-bottom: 30px;
             background: var(--bg-dark);
             text-align: center;
             font-size: 0.9rem;
@@ -681,10 +690,9 @@
            ========================================= */
 
         @media (max-width: 992px) {
-            .container { padding: 0 1.5rem; }
-            .glass-card { padding: 1.5rem; } /* Reduce bulkiness on tablets/mobiles */
+            .container { padding-left: 1.5rem; padding-right: 1.5rem; }
+            .glass-card { padding: 1.5rem; } 
             
-            /* Center and shrink the wide photo card */
             .about-photo-wrapper {
                 max-width: 400px;
                 margin: 0 auto; 
@@ -715,10 +723,8 @@
                 right: 0; 
             }
 
-            /* Hide the main header button on mobile */
             .contact-btn.hide-on-mobile { display: none; }
             
-            /* Show the mobile menu button */
             .mobile-only-btn {
                 display: block; 
                 width: 100%;
@@ -769,14 +775,16 @@
             .process-grid { grid-template-columns: 1fr; }
             .about-content { grid-template-columns: 1fr; gap: 2rem; }
             
+            /* IMPORTANT: Use padding-top and padding-bottom instead of shorthand */
             .projects, .services, .stats, .process, .about, .cta {
-                padding: 60px 0; 
+                padding-top: 60px;
+                padding-bottom: 60px; 
             }
         }
 
         @media (max-width: 576px) {
-            .container { padding: 0 1.2rem; } /* Ensure nice spacing around edges */
-            .glass-card { padding: 1.2rem; } /* Shrink inner padding for small screens */
+            .container { padding-left: 1.2rem; padding-right: 1.2rem; } 
+            .glass-card { padding: 1.2rem; } 
             
             .hero-text h1 { font-size: 2rem; }
             .logo-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
@@ -789,16 +797,14 @@
             .metric-badge.v1 { top: -5%; right: -5%; }
             .metric-badge.v2 { bottom: -5%; left: -5%; }
             
-            /* Limit photo width on phones to leave side margins */
             .about-photo-wrapper {
                 max-width: 320px;
                 margin: 0 auto;
             }
             .about-image {
-                height: 300px; /* Better ratio for smaller width */
+                height: 300px; 
             }
             
-            /* Stop project images from being too tall on phones */
             .project-img-wrapper {
                 height: 220px; 
             }

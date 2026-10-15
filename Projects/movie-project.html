@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Rental System | Tharusha Jayod</title>
+    <meta name="description" content="Case study of Online Movie Rental & Review System - A full-stack OOP web platform for movie discovery, cart rentals, ratings, and transaction processing.">
+    <title>Online Movie Rental System | Tharusha Jayod</title>
     
     <link rel="icon" href="../assets/Logo.png" type="image/png">
     
     <style>
-        /* --- Core Theme Variables --- */
+        /* --- Core Theme Variables (Consistent Design System) --- */
         :root {
             --bg-dark: #03051e; 
             --bg-glass: rgba(255, 255, 255, 0.05); 
@@ -30,6 +31,21 @@
             color: var(--text-primary);
             font-family: var(--font-family-sans);
             scroll-behavior: smooth;
+            min-height: 100vh;
+        }
+
+        /* Ambient subtle blue glow */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 900px;
+            background: radial-gradient(ellipse 70% 600px at 50% 150px, var(--accent-blue-glow), transparent 75%);
+            z-index: -1;
+            opacity: 0.6;
+            pointer-events: none;
         }
 
         a { text-decoration: none; color: inherit; transition: var(--transition-main); }
@@ -45,8 +61,38 @@
         }
 
         .text-accent { color: var(--accent-cyan); }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 0.9rem 1.8rem;
+            border-radius: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            border: 2px solid var(--text-primary);
+            cursor: pointer;
+            text-align: center;
+            font-family: var(--font-family-sans);
+            transition: var(--transition-main);
+        }
+
+        .btn-primary {
+            background: var(--text-primary);
+            color: var(--bg-dark);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--text-primary);
+            box-shadow: 0 0 20px var(--accent-blue-glow);
+            transform: translateY(-2px);
+        }
         
-        /* --- Custom Navbar for Project Page --- */
+        /* --- Navigation --- */
         header {
             position: fixed;
             top: 0; left: 0; width: 100%; z-index: 1000;
@@ -65,34 +111,45 @@
             align-items: center;
             gap: 10px;
             font-size: 0.9rem;
+            font-family: var(--font-family-sans);
         }
         .back-btn:hover { background: var(--text-primary); color: var(--bg-dark); }
 
         /* --- Project Hero Section --- */
         .project-hero {
-            padding-top: 150px;
-            padding-bottom: 60px;
+            padding-top: 140px;
+            padding-bottom: 50px;
             text-align: center;
             position: relative;
         }
-        .project-hero::before {
-            content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-            width: 80%; height: 100%; background: radial-gradient(circle at top, var(--accent-blue-glow), transparent 70%);
-            z-index: -1; opacity: 0.5;
+        .project-category { 
+            color: var(--accent-cyan); 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            font-size: 0.85rem; 
+            margin-bottom: 1rem; 
+            display: inline-block;
+            background: rgba(0, 255, 255, 0.08);
+            border: 1px solid rgba(0, 255, 255, 0.25);
+            padding: 6px 16px;
+            border-radius: 20px;
         }
-        .project-category { color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 1rem; display: block; }
-        .project-hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1.5rem; }
-        .project-summary { color: var(--text-secondary); font-size: 1.2rem; max-width: 800px; margin: 0 auto 3rem; line-height: 1.6; }
+        .project-hero h1 { font-size: clamp(2.4rem, 5vw, 3.8rem); margin-bottom: 0.5rem; line-height: 1.2; }
+        .project-hero .project-subtitle { font-size: clamp(1.15rem, 2.5vw, 1.6rem); color: var(--accent-cyan); font-family: var(--font-family-serif); margin-bottom: 1.5rem; font-weight: 400; }
+        .project-summary { color: var(--text-secondary); font-size: 1.15rem; max-width: 840px; margin: 0 auto 2.5rem; line-height: 1.65; }
 
         /* Main Project Cover */
         .project-cover {
             width: 100%;
-            height: 60vh;
-            min-height: 400px;
+            height: 58vh;
+            min-height: 380px;
+            max-height: 620px;
             border-radius: 20px;
             object-fit: cover;
+            object-position: top center;
             border: 1px solid var(--border-glass);
             box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            background: rgba(2, 4, 20, 0.85);
         }
 
         /* --- Project Details Info --- */
@@ -100,10 +157,10 @@
             padding: 60px 0;
             display: grid;
             grid-template-columns: 2fr 1fr;
-            gap: 4rem;
+            gap: 3.5rem;
         }
-        .info-content h2 { font-size: 2rem; margin-bottom: 1.5rem; }
-        .info-content p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem; }
+        .info-content h2 { font-size: 2rem; margin-bottom: 1.25rem; }
+        .info-content p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.25rem; font-size: 1rem; }
         
         .info-sidebar {
             background: var(--bg-glass);
@@ -114,14 +171,90 @@
         }
         .sidebar-item { margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-glass); padding-bottom: 1.5rem; }
         .sidebar-item:last-child { margin-bottom: 0; border-bottom: none; padding-bottom: 0; }
-        .sidebar-item h4 { color: var(--text-primary); font-size: 1.1rem; margin-bottom: 0.5rem; font-family: var(--font-family-sans); text-transform: uppercase; }
-        .sidebar-item p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5; }
-        .tech-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
-        .tech-tag { background: rgba(0, 255, 255, 0.1); color: var(--accent-cyan); padding: 5px 12px; border-radius: 15px; font-size: 0.8rem; border: 1px solid rgba(0, 255, 255, 0.2); }
+        .sidebar-item h4 { color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.5rem; font-family: var(--font-family-sans); text-transform: uppercase; letter-spacing: 0.75px; }
+        .sidebar-item p { color: var(--text-secondary); font-size: 0.92rem; line-height: 1.5; }
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .tech-tag { background: rgba(0, 255, 255, 0.08); color: var(--accent-cyan); padding: 5px 12px; border-radius: 15px; font-size: 0.8rem; border: 1px solid rgba(0, 255, 255, 0.2); }
 
-        /* --- Gallery & Video Section --- */
-        .project-gallery { padding: 60px 0 100px; }
-        .project-gallery h2 { font-size: 2.5rem; text-align: center; margin-bottom: 3rem; }
+        /* --- Capabilities Grid --- */
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+            margin: 1.5rem 0 2.5rem;
+        }
+        .capability-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 14px;
+            padding: 1.25rem;
+            transition: var(--transition-main);
+        }
+        .capability-card:hover {
+            border-color: rgba(0, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.15);
+        }
+        .capability-card h4 {
+            font-family: var(--font-family-sans);
+            font-size: 0.98rem;
+            color: var(--text-primary);
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+        .capability-card h4 i {
+            color: var(--accent-cyan);
+            font-size: 0.95rem;
+        }
+        .capability-card p {
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            line-height: 1.5;
+            margin-bottom: 0 !important;
+        }
+
+        /* --- Technical Focus Cards --- */
+        .tech-focus-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+        }
+        .tech-focus-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-left: 3px solid var(--accent-cyan);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+        }
+        .tech-focus-card h4 {
+            font-family: var(--font-family-sans);
+            color: var(--text-primary);
+            font-size: 1.05rem;
+            margin-bottom: 0.4rem;
+        }
+        .tech-focus-card p {
+            margin-bottom: 0 !important;
+            font-size: 0.92rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        /* --- Gallery Section --- */
+        .project-gallery { padding: 40px 0 100px; }
+        .project-gallery h2 { font-size: 2.5rem; text-align: center; margin-bottom: 0.75rem; }
+        .project-gallery .gallery-intro {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+        }
         
         .media-grid {
             display: grid;
@@ -135,13 +268,39 @@
             border-radius: 15px;
             overflow: hidden;
             transition: var(--transition-main);
+            display: flex;
+            flex-direction: column;
         }
         .media-card:hover { transform: translateY(-5px); box-shadow: 0 8px 32px 0 var(--accent-blue-glow); }
-        .media-card img, .media-card video { width: 100%; height: auto; }
-        .media-caption { padding: 1rem 1.5rem; color: var(--text-secondary); font-size: 0.9rem; text-align: center; border-top: 1px solid var(--border-glass); }
-
-        /* Full width video/image */
-        .media-full { grid-column: 1 / -1; }
+        .media-card-img-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: rgba(2, 4, 20, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .media-card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        .media-card:hover .media-card-img-wrapper img {
+            transform: scale(1.02);
+        }
+        .media-caption {
+            padding: 1rem 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-align: center;
+            border-top: 1px solid var(--border-glass);
+            margin-top: auto;
+            background: rgba(3, 5, 30, 0.4);
+        }
 
         /* --- Footer --- */
         footer { padding: 40px 0; background: var(--bg-dark); text-align: center; font-size: 0.9rem; color: var(--text-secondary); border-top: 1px solid var(--border-glass); }
@@ -150,11 +309,13 @@
         @media (max-width: 992px) {
             .project-info { grid-template-columns: 1fr; gap: 3rem; }
             .media-grid { grid-template-columns: 1fr; }
+            .capabilities-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 576px) {
             .container { padding-left: 1.2rem; padding-right: 1.2rem; }
             .project-cover { height: 40vh; min-height: 250px; }
             .project-hero h1 { font-size: 2.2rem; }
+            .capabilities-grid { grid-template-columns: 1fr; }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
@@ -164,78 +325,124 @@
 
     <header>
         <div class="container nav">
-            <a href="../index.html" class="logo"><img src="../assets/Logo.png" alt="Logo"> CipherCore<span class="text-accent">.Tech</span></a>
+            <a href="../index.html" class="logo"><img src="../assets/Logo.png" alt="CipherCore Tech Logo"> CipherCore<span class="text-accent">.Tech</span></a>
             <a href="../index.html#work" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
         </div>
     </header>
 
     <main>
+        <!-- Hero Section -->
         <section class="project-hero container">
-            <span class="project-category">Full-Stack Development & OOP</span>
-            <h1>Online Movie <br><span class="text-accent">Rental & Review System</span></h1>
-            <p class="project-summary">A robust web application designed to handle movie rentals, user reviews, and secure transactions. Built from scratch focusing on strong Object-Oriented Programming (OOP) architectures and scalable folder structures.</p>
+            <span class="project-category">Full-Stack Development &amp; OOP Architecture</span>
+            <h1>Online Movie <span class="text-accent">Rental System</span></h1>
+            <div class="project-subtitle">Movie Rental, User Reviews &amp; Payment Gateway Platform</div>
+            <p class="project-summary">A structured full-stack web application designed for browsing film titles, streaming rentals, managing shopping carts, leaving verified reviews, and processing digital transactions. Engineered with an MVC architecture and strict Object-Oriented principles.</p>
             
-            <img src="../My works/Movie Rental System/home.png" alt="Movie Rental Project Cover" class="project-cover">
+            <img src="../My works/Movie Rental System/home.png" alt="Movie Rental Project Cover" class="project-cover" width="1200" height="600">
         </section>
 
+        <!-- Project Overview & Sidebar -->
         <section class="project-info container">
             <div class="info-content">
                 <h2>Project <span class="ser text-accent">Overview</span></h2>
-                <p>This project was developed as a comprehensive platform where users can browse a wide catalog of movies, read and write reviews, and rent their favorite titles seamlessly. The core objective was to apply complex backend logic while maintaining a clean, intuitive frontend interface for the end-user.</p>
-                <p>I focused heavily on defining a proper folder structure (MVC pattern) and implementing strict Object-Oriented Programming principles. This ensured the codebase remained maintainable, modular, and easy to collaborate on.</p>
+                <p>The Online Movie Rental &amp; Review System was developed as an end-to-end digital cinema platform where film enthusiasts can explore an extensive catalog of movies, evaluate ratings, post detailed reviews, and rent titles securely. The project focused on building reliable business logic around rental duration tracking, digital inventory control, and transaction consistency.</p>
                 
-                <h2 style="margin-top: 3rem;">The <span class="ser text-accent">Challenges</span> & Solutions</h2>
-                <p>Managing the rental logic alongside user cart sessions and database updates simultaneously posed a technical challenge. I solved this by implementing secure backend endpoints and integrating a reliable payment gateway simulation, ensuring data consistency across all layers of the application.</p>
+                <p>A central engineering objective was establishing a rigorous Model-View-Controller (MVC) architectural separation. By implementing strict Object-Oriented Programming (OOP) patterns, data transfer objects, and repository layers, the application ensures high maintainability and testability across backend endpoints and client interfaces.</p>
+                
+                <h2 style="margin-top: 3rem;">Key <span class="ser text-accent">Capabilities</span></h2>
+                <div class="capabilities-grid">
+                    <div class="capability-card">
+                        <h4><i class="fas fa-film"></i> Movie Catalog &amp; Categorization</h4>
+                        <p>Rich catalog featuring genres, release dates, director details, trailers, and rental fee tiers.</p>
+                    </div>
+                    <div class="capability-card">
+                        <h4><i class="fas fa-shopping-basket"></i> Rental Cart &amp; Expiry Logic</h4>
+                        <p>Dynamic rental cart allowing users to configure multi-day viewing windows with automated rental duration tracking.</p>
+                    </div>
+                    <div class="capability-card">
+                        <h4><i class="fas fa-star-half-alt"></i> Ratings &amp; User Reviews</h4>
+                        <p>Community feedback engine with 5-star scoring and verified customer commentary on watched titles.</p>
+                    </div>
+                    <div class="capability-card">
+                        <h4><i class="fas fa-shield-alt"></i> Secure Authentication &amp; Sessions</h4>
+                        <p>User registration, session protection, and personalized rental history tracking across logins.</p>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 3rem;">Technical Challenges &amp; <span class="ser text-accent">Solutions</span></h2>
+                <div class="tech-focus-grid">
+                    <div class="tech-focus-card">
+                        <h4>Concurrency &amp; Cart State Synchronization</h4>
+                        <p>Managing rental sessions alongside simultaneous user checkouts required robust database transaction boundaries. Implementing transactional updates prevented rental race conditions and maintained ledger accuracy.</p>
+                    </div>
+                    <div class="tech-focus-card">
+                        <h4>Modular MVC Architecture</h4>
+                        <p>Decoupled business rules from presentation layers by enforcing OOP encapsulation, dedicated controller routing, and structured database queries for reliable performance.</p>
+                    </div>
+                </div>
             </div>
             
             <aside class="info-sidebar">
                 <div class="sidebar-item">
                     <h4>Project Type</h4>
-                    <p>Academic Group Project</p>
+                    <p>Academic Software Project</p>
                 </div>
                 <div class="sidebar-item">
                     <h4>My Role</h4>
                     <p>Full-Stack Developer</p>
                 </div>
                 <div class="sidebar-item">
-                    <h4>Key Features</h4>
-                    <p>User Authentication, Rental Cart, Review System, Payment Integration</p>
+                    <h4>Architecture</h4>
+                    <p>MVC &amp; OOP Design Patterns</p>
                 </div>
                 <div class="sidebar-item">
                     <h4>Technologies Used</h4>
                     <div class="tech-tags">
                         <span class="tech-tag">Java / Node.js</span>
-                        <span class="tech-tag">OOP</span>
                         <span class="tech-tag">MySQL</span>
-                        <span class="tech-tag">HTML/CSS</span>
+                        <span class="tech-tag">OOP</span>
+                        <span class="tech-tag">HTML5 / CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
                     </div>
                 </div>
                 <div class="sidebar-item" style="margin-top: 1rem;">
-                    <a href="#" class="btn btn-primary" style="width: 100%; padding: 0.8rem;">View on GitHub <i class="fab fa-github" style="margin-left: 5px;"></i></a>
+                    <a href="https://github.com/Tharushajayod" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%;">View on GitHub <i class="fab fa-github"></i></a>
                 </div>
             </aside>
         </section>
 
+        <!-- Gallery Section -->
         <section class="project-gallery container">
             <h2>System <span class="ser text-accent">Screenshots</span></h2>
+            <p class="gallery-intro">Interface previews from the movie rental platform illustrating the catalog, cart checkout flow, and user review modules.</p>
             
             <div class="media-grid">
                 <div class="media-card">
-                    <img src="../My works/Movie Rental System/home.png" alt="Movie Catalog">
-                    <div class="media-caption">Main Movie Catalog Interface</div>
+                    <div class="media-card-img-wrapper">
+                        <img src="../My works/Movie Rental System/home.png" alt="Main Movie Catalog Interface" loading="lazy" width="800" height="450">
+                    </div>
+                    <div class="media-caption">Main Movie Catalog Interface with Genre Filtering</div>
                 </div>
                 
                 <div class="media-card">
-                    <img src="../My works/Movie Rental System/home.png" alt="Cart System">
-                    <div class="media-caption">Rental Cart & Checkout Flow</div>
+                    <div class="media-card-img-wrapper">
+                        <img src="../My works/Movie Rental System/Screenshot 2026-03-21 121927.png" alt="Movie Catalog and Details View" loading="lazy" width="800" height="450">
+                    </div>
+                    <div class="media-caption">Movie Detail View with Synopsis, Cast &amp; Rental Options</div>
                 </div>
 
-                <div class="media-card media-full">
-                    <video controls muted loop poster="../My works/Movie Rental System/home.png">
-                        <source src="../assets/movie-demo-video.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    <div class="media-caption">Complete System Walkthrough</div>
+                <div class="media-card">
+                    <div class="media-card-img-wrapper">
+                        <img src="../My works/Movie Rental System/Screenshot 2026-03-21 121942.png" alt="Rental Cart and Duration Selection" loading="lazy" width="800" height="450">
+                    </div>
+                    <div class="media-caption">Rental Cart Management with Duration &amp; Price Calculation</div>
+                </div>
+
+                <div class="media-card">
+                    <div class="media-card-img-wrapper">
+                        <img src="../My works/Movie Rental System/Screenshot 2026-03-21 121953.png" alt="Transaction Checkout and Order Confirmation" loading="lazy" width="800" height="450">
+                    </div>
+                    <div class="media-caption">Secure Order Confirmation &amp; Digital Rental Receipt</div>
                 </div>
             </div>
         </section>

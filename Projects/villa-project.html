@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Villa Website Project | Tharusha Jayod</title>
+    <meta name="description" content="Case study of Next-Gen Villa Website - Full UI/UX redesign and web application for The Nature's Edge Mirissa luxury villa.">
+    <title>Next-Gen Villa Website | Tharusha Jayod</title>
     
     <link rel="icon" href="../assets/Logo.png" type="image/png">
     
     <style>
-        /* --- Core Theme Variables (Same as Main Page) --- */
+        /* --- Core Theme Variables (Consistent Design System) --- */
         :root {
             --bg-dark: #03051e; 
             --bg-glass: rgba(255, 255, 255, 0.05); 
@@ -30,6 +31,21 @@
             color: var(--text-primary);
             font-family: var(--font-family-sans);
             scroll-behavior: smooth;
+            min-height: 100vh;
+        }
+
+        /* Ambient subtle blue glow */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 900px;
+            background: radial-gradient(ellipse 70% 600px at 50% 150px, var(--accent-blue-glow), transparent 75%);
+            z-index: -1;
+            opacity: 0.6;
+            pointer-events: none;
         }
 
         a { text-decoration: none; color: inherit; transition: var(--transition-main); }
@@ -45,8 +61,38 @@
         }
 
         .text-accent { color: var(--accent-cyan); }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 0.9rem 1.8rem;
+            border-radius: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            border: 2px solid var(--text-primary);
+            cursor: pointer;
+            text-align: center;
+            font-family: var(--font-family-sans);
+            transition: var(--transition-main);
+        }
+
+        .btn-primary {
+            background: var(--text-primary);
+            color: var(--bg-dark);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--text-primary);
+            box-shadow: 0 0 20px var(--accent-blue-glow);
+            transform: translateY(-2px);
+        }
         
-        /* --- Custom Navbar for Project Page --- */
+        /* --- Navigation --- */
         header {
             position: fixed;
             top: 0; left: 0; width: 100%; z-index: 1000;
@@ -65,34 +111,45 @@
             align-items: center;
             gap: 10px;
             font-size: 0.9rem;
+            font-family: var(--font-family-sans);
         }
         .back-btn:hover { background: var(--text-primary); color: var(--bg-dark); }
 
         /* --- Project Hero Section --- */
         .project-hero {
-            padding-top: 150px;
-            padding-bottom: 60px;
+            padding-top: 140px;
+            padding-bottom: 50px;
             text-align: center;
             position: relative;
         }
-        .project-hero::before {
-            content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-            width: 80%; height: 100%; background: radial-gradient(circle at top, var(--accent-blue-glow), transparent 70%);
-            z-index: -1; opacity: 0.5;
+        .project-category { 
+            color: var(--accent-cyan); 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            font-size: 0.85rem; 
+            margin-bottom: 1rem; 
+            display: inline-block;
+            background: rgba(0, 255, 255, 0.08);
+            border: 1px solid rgba(0, 255, 255, 0.25);
+            padding: 6px 16px;
+            border-radius: 20px;
         }
-        .project-category { color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 1rem; display: block; }
-        .project-hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1.5rem; }
-        .project-summary { color: var(--text-secondary); font-size: 1.2rem; max-width: 800px; margin: 0 auto 3rem; line-height: 1.6; }
+        .project-hero h1 { font-size: clamp(2.4rem, 5vw, 3.8rem); margin-bottom: 0.5rem; line-height: 1.2; }
+        .project-hero .project-subtitle { font-size: clamp(1.15rem, 2.5vw, 1.6rem); color: var(--accent-cyan); font-family: var(--font-family-serif); margin-bottom: 1.5rem; font-weight: 400; }
+        .project-summary { color: var(--text-secondary); font-size: 1.15rem; max-width: 840px; margin: 0 auto 2.5rem; line-height: 1.65; }
 
         /* Main Project Cover */
         .project-cover {
             width: 100%;
-            height: 60vh;
-            min-height: 400px;
+            height: 58vh;
+            min-height: 380px;
+            max-height: 620px;
             border-radius: 20px;
             object-fit: cover;
+            object-position: top center;
             border: 1px solid var(--border-glass);
             box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            background: rgba(2, 4, 20, 0.85);
         }
 
         /* --- Project Details Info --- */
@@ -100,10 +157,10 @@
             padding: 60px 0;
             display: grid;
             grid-template-columns: 2fr 1fr;
-            gap: 4rem;
+            gap: 3.5rem;
         }
-        .info-content h2 { font-size: 2rem; margin-bottom: 1.5rem; }
-        .info-content p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem; }
+        .info-content h2 { font-size: 2rem; margin-bottom: 1.25rem; }
+        .info-content p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.25rem; font-size: 1rem; }
         
         .info-sidebar {
             background: var(--bg-glass);
@@ -114,14 +171,90 @@
         }
         .sidebar-item { margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-glass); padding-bottom: 1.5rem; }
         .sidebar-item:last-child { margin-bottom: 0; border-bottom: none; padding-bottom: 0; }
-        .sidebar-item h4 { color: var(--text-primary); font-size: 1.1rem; margin-bottom: 0.5rem; font-family: var(--font-family-sans); text-transform: uppercase; }
-        .sidebar-item p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5; }
-        .tech-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
-        .tech-tag { background: rgba(0, 255, 255, 0.1); color: var(--accent-cyan); padding: 5px 12px; border-radius: 15px; font-size: 0.8rem; border: 1px solid rgba(0, 255, 255, 0.2); }
+        .sidebar-item h4 { color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.5rem; font-family: var(--font-family-sans); text-transform: uppercase; letter-spacing: 0.75px; }
+        .sidebar-item p { color: var(--text-secondary); font-size: 0.92rem; line-height: 1.5; }
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .tech-tag { background: rgba(0, 255, 255, 0.08); color: var(--accent-cyan); padding: 5px 12px; border-radius: 15px; font-size: 0.8rem; border: 1px solid rgba(0, 255, 255, 0.2); }
 
-        /* --- Gallery & Video Section --- */
-        .project-gallery { padding: 60px 0 100px; }
-        .project-gallery h2 { font-size: 2.5rem; text-align: center; margin-bottom: 3rem; }
+        /* --- Capabilities Grid --- */
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+            margin: 1.5rem 0 2.5rem;
+        }
+        .capability-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 14px;
+            padding: 1.25rem;
+            transition: var(--transition-main);
+        }
+        .capability-card:hover {
+            border-color: rgba(0, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.15);
+        }
+        .capability-card h4 {
+            font-family: var(--font-family-sans);
+            font-size: 0.98rem;
+            color: var(--text-primary);
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+        .capability-card h4 i {
+            color: var(--accent-cyan);
+            font-size: 0.95rem;
+        }
+        .capability-card p {
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            line-height: 1.5;
+            margin-bottom: 0 !important;
+        }
+
+        /* --- Technical Focus Cards --- */
+        .tech-focus-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+        }
+        .tech-focus-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-left: 3px solid var(--accent-cyan);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+        }
+        .tech-focus-card h4 {
+            font-family: var(--font-family-sans);
+            color: var(--text-primary);
+            font-size: 1.05rem;
+            margin-bottom: 0.4rem;
+        }
+        .tech-focus-card p {
+            margin-bottom: 0 !important;
+            font-size: 0.92rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        /* --- Gallery Section --- */
+        .project-gallery { padding: 40px 0 100px; }
+        .project-gallery h2 { font-size: 2.5rem; text-align: center; margin-bottom: 0.75rem; }
+        .project-gallery .gallery-intro {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+        }
         
         .media-grid {
             display: grid;
@@ -135,13 +268,39 @@
             border-radius: 15px;
             overflow: hidden;
             transition: var(--transition-main);
+            display: flex;
+            flex-direction: column;
         }
         .media-card:hover { transform: translateY(-5px); box-shadow: 0 8px 32px 0 var(--accent-blue-glow); }
-        .media-card img, .media-card video { width: 100%; height: auto; }
-        .media-caption { padding: 1rem 1.5rem; color: var(--text-secondary); font-size: 0.9rem; text-align: center; border-top: 1px solid var(--border-glass); }
-
-        /* Full width video/image */
-        .media-full { grid-column: 1 / -1; }
+        .media-card-img-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: rgba(2, 4, 20, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .media-card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        .media-card:hover .media-card-img-wrapper img {
+            transform: scale(1.02);
+        }
+        .media-caption {
+            padding: 1rem 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-align: center;
+            border-top: 1px solid var(--border-glass);
+            margin-top: auto;
+            background: rgba(3, 5, 30, 0.4);
+        }
 
         /* --- Footer --- */
         footer { padding: 40px 0; background: var(--bg-dark); text-align: center; font-size: 0.9rem; color: var(--text-secondary); border-top: 1px solid var(--border-glass); }
@@ -150,10 +309,13 @@
         @media (max-width: 992px) {
             .project-info { grid-template-columns: 1fr; gap: 3rem; }
             .media-grid { grid-template-columns: 1fr; }
+            .capabilities-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 576px) {
             .container { padding-left: 1.2rem; padding-right: 1.2rem; }
             .project-cover { height: 40vh; min-height: 250px; }
+            .project-hero h1 { font-size: 2.2rem; }
+            .capabilities-grid { grid-template-columns: 1fr; }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
@@ -163,28 +325,61 @@
 
     <header>
         <div class="container nav">
-            <a href="../index.html" class="logo"><img src="../assets/Logo.png" alt="Logo"> CipherCore<span class="text-accent">.Tech</span></a>
+            <a href="../index.html" class="logo"><img src="../assets/Logo.png" alt="CipherCore Tech Logo"> CipherCore<span class="text-accent">.Tech</span></a>
             <a href="../index.html#work" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
         </div>
     </header>
 
     <main>
+        <!-- Hero Section -->
         <section class="project-hero container">
-            <span class="project-category">UI/UX Design & Web Development</span>
+            <span class="project-category">UI/UX Design &amp; Web Development</span>
             <h1>Next-Gen <span class="text-accent">Villa Website</span></h1>
-            <p class="project-summary">A full top-to-bottom redesign and development for a luxury villa in Mirissa. Focused on high conversion rates, seamless booking flows, and showcasing the property's natural beauty.</p>
+            <div class="project-subtitle">Luxury Hospitality Booking Experience</div>
+            <p class="project-summary">A full top-to-bottom redesign and web application for a premier luxury boutique villa in Mirissa, Sri Lanka. Engineered for elevated visual storytelling, high visitor conversion, and frictionless direct reservation flows.</p>
             
-            <img src="../My works/The Nature's Edge Mirissa/home.jpeg" alt="Villa Project Cover" class="project-cover">
+            <img src="../My works/The Nature's Edge Mirissa/home.jpeg" alt="Villa Project Cover - The Nature's Edge Mirissa" class="project-cover" width="1200" height="600">
         </section>
 
+        <!-- Project Overview & Sidebar -->
         <section class="project-info container">
             <div class="info-content">
                 <h2>Project <span class="ser text-accent">Overview</span></h2>
-                <p>The client approached me to revamp their existing digital presence. The previous website was outdated and had a high bounce rate. My goal was to create a modern, glass-like UI that reflects the luxurious experience of staying at the villa.</p>
-                <p>I started with wireframing in Figma, ensuring the user journey from landing page to the booking confirmation was as smooth as possible. After design approval, I developed the frontend using modern web technologies, ensuring 100% mobile responsiveness and fast load times.</p>
+                <p>The client approached me to completely revitalize their digital hospitality presence. The prior website suffered from dated layouts, slow load times, and an awkward reservation funnel that resulted in elevated bounce rates. The primary goal was to construct a contemporary glassmorphism-inspired digital identity that mirrors the luxurious, serene experience of staying at the property.</p>
                 
-                <h2 style="margin-top: 3rem;">The <span class="ser text-accent">Challenges</span> & Solutions</h2>
-                <p>One of the main challenges was integrating a custom booking calendar that syncs without lag. I utilized custom APIs to ensure real-time availability updates, preventing double bookings and improving backend management for the villa owners.</p>
+                <p>Beginning with comprehensive Figma wireframing, the user journey was restructured to prioritize immersive visual previews of the villa grounds, suite amenities, and private pool views. The development was completed with clean responsive web architecture, delivering lightning-fast load times, seamless typography scaling, and fluid animations across mobile and desktop devices.</p>
+                
+                <h2 style="margin-top: 3rem;">Key <span class="ser text-accent">Capabilities</span></h2>
+                <div class="capabilities-grid">
+                    <div class="capability-card">
+                        <h4><i class="fas fa-calendar-alt"></i> Real-Time Booking Calendar</h4>
+                        <p>Dynamic date-range availability selector that syncs with back-office reservation availability to avoid double-bookings.</p>
+                    </div>
+                    <div class="capability-card">
+                        <h4><i class="fas fa-images"></i> Immersive Visual Gallery</h4>
+                        <p>High-resolution responsive imagery showcasing villa suites, architecture, dining areas, and Mirissa surroundings.</p>
+                    </div>
+                    <div class="capability-card">
+                        <h4><i class="fas fa-bed"></i> Suite & Amenity Breakdowns</h4>
+                        <p>Detailed room specifications including guest capacity, bed configurations, private amenities, and bespoke concierge packages.</p>
+                    </div>
+                    <div class="capability-card">
+                        <h4><i class="fas fa-mobile-alt"></i> Mobile-First Guest Funnel</h4>
+                        <p>Optimized touch navigation and accelerated checkout flows designed specifically for international mobile travelers.</p>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 3rem;">Technical Challenges &amp; <span class="ser text-accent">Solutions</span></h2>
+                <div class="tech-focus-grid">
+                    <div class="tech-focus-card">
+                        <h4>Performance &amp; High-Resolution Media</h4>
+                        <p>Hospitality sites demand rich photography without sacrificing page speed. Implementing modern image compression and lazy loading reduced initial payload while preserving the pristine clarity of the luxury property visuals.</p>
+                    </div>
+                    <div class="tech-focus-card">
+                        <h4>Reservation Logic &amp; Guest Inquiries</h4>
+                        <p>Developed responsive booking form validation with automated inquiry routing, allowing the resort team to review booking requests and communicate directly with guests.</p>
+                    </div>
+                </div>
             </div>
             
             <aside class="info-sidebar">
@@ -194,7 +389,7 @@
                 </div>
                 <div class="sidebar-item">
                     <h4>My Role</h4>
-                    <p>Lead UI/UX Designer & Full-Stack Developer</p>
+                    <p>Lead UI/UX Designer &amp; Web Developer</p>
                 </div>
                 <div class="sidebar-item">
                     <h4>Timeline</h4>
@@ -203,38 +398,51 @@
                 <div class="sidebar-item">
                     <h4>Technologies Used</h4>
                     <div class="tech-tags">
-                        <span class="tech-tag">React.js</span>
+                        <span class="tech-tag">React</span>
                         <span class="tech-tag">Node.js</span>
                         <span class="tech-tag">Tailwind CSS</span>
                         <span class="tech-tag">Figma</span>
+                        <span class="tech-tag">HTML5 / CSS3</span>
                     </div>
                 </div>
                 <div class="sidebar-item" style="margin-top: 1rem;">
-                    <a href="https://the-natures-edge-mirissa.onrender.com/index.html" class="btn btn-primary" style="width: 100%; padding: 0.8rem;">Live Preview <i class="fas fa-external-link-alt" style="margin-left: 5px;"></i></a>
+                    <a href="https://the-natures-edge-mirissa.onrender.com/index.html" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%;">Live Preview <i class="fas fa-external-link-alt"></i></a>
                 </div>
             </aside>
         </section>
 
+        <!-- Gallery Section -->
         <section class="project-gallery container">
-            <h2>Gallery <span class="ser text-accent">& Previews</span></h2>
+            <h2>System <span class="ser text-accent">Screenshots</span></h2>
+            <p class="gallery-intro">Interface previews from the live hospitality platform showcasing property storytelling, suite highlights, and the guest booking workflow.</p>
             
             <div class="media-grid">
                 <div class="media-card">
-                    <img src="../My works/The Nature's Edge Mirissa/home.jpeg" alt="Home Page">
-                    <div class="media-caption">Landing Page Design</div>
+                    <div class="media-card-img-wrapper">
+                        <img src="../My works/The Nature's Edge Mirissa/home.jpeg" alt="Landing Page and Resort Showcase" loading="lazy" width="800" height="450">
+                    </div>
+                    <div class="media-caption">Hero &amp; Resort Storytelling Landing Page</div>
                 </div>
                 
                 <div class="media-card">
-                    <img src="../My works/The Nature's Edge Mirissa/home.jpeg" alt="Booking Page">
-                    <div class="media-caption">Booking Interface & Calendar</div>
+                    <div class="media-card-img-wrapper">
+                        <img src="../My works/The Nature's Edge Mirissa/Screenshot_21-3-2026_121025_the-natures-edge-mirissa.onrender.com.jpeg" alt="Villa Amenities and Accommodations" loading="lazy" width="800" height="450">
+                    </div>
+                    <div class="media-caption">Suite Accommodations &amp; Property Features</div>
                 </div>
 
-                <div class="media-card media-full">
-                    <video controls muted loop poster="../My works/The Nature's Edge Mirissa/home.jpeg">
-                        <source src="../assets/sample-video.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    <div class="media-caption">Full Interactive Walkthrough of the Platform</div>
+                <div class="media-card">
+                    <div class="media-card-img-wrapper">
+                        <img src="../My works/The Nature's Edge Mirissa/Screenshot_21-3-2026_121046_the-natures-edge-mirissa.onrender.com.jpeg" alt="Guest Reviews and Experiences" loading="lazy" width="800" height="450">
+                    </div>
+                    <div class="media-caption">Guest Experience &amp; Testimonial Showcase</div>
+                </div>
+
+                <div class="media-card">
+                    <div class="media-card-img-wrapper">
+                        <img src="../My works/The Nature's Edge Mirissa/Screenshot_21-3-2026_12910_the-natures-edge-mirissa.onrender.com.jpeg" alt="Reservation Inquiries and Contact Interface" loading="lazy" width="800" height="450">
+                    </div>
+                    <div class="media-caption">Direct Booking Inquiries &amp; Contact Interface</div>
                 </div>
             </div>
         </section>

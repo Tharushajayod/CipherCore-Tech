@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Case study of Skyline Living Apartment – a university group project for full‑stack apartment sales and management.">
+    <meta name="description"
+        content="Case study of Skyline Living Apartment – A university Software Engineering group project for an apartment sales and management system covering discovery, appointments, reservations, payments, refunds, and ownership records.">
     <title>Skyline Living Apartment | Tharusha Jayod</title>
+
     <link rel="icon" href="../assets/Logo.png" type="image/png">
+
     <style>
+        /* --- Core Theme Variables (Consistent Design System) --- */
         :root {
             --bg-dark: #03051e;
             --bg-glass: rgba(255, 255, 255, 0.05);
@@ -19,73 +24,768 @@
             --font-family-sans: 'Space Grotesk', sans-serif;
             --font-family-serif: 'Playfair Display', serif;
         }
-        *{margin:0;padding:0;box-sizing:border-box;}
-        body{background-color:var(--bg-dark);color:var(--text-primary);font-family:var(--font-family-sans);}
-        a{text-decoration:none;color:inherit;transition:var(--transition-main);}
-        .container{max-width:1200px;margin:auto;padding:0 2rem;}
-        .project-hero{padding:150px 0 60px;text-align:center;position:relative;}
-        .project-hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;height:100%;background:radial-gradient(circle at top,var(--accent-blue-glow),transparent 70%);z-index:-1;opacity:0.5;}
-        .project-category{color:var(--accent-cyan);text-transform:uppercase;letter-spacing:2px;font-size:0.9rem;margin-bottom:1rem;}
-        .project-hero h1{font-size:clamp(2.5rem,5vw,4rem);margin-bottom:0.5rem;}
-        .project-subtitle{font-size:clamp(1.2rem,3vw,1.8rem);color:var(--accent-cyan);font-family:var(--font-family-serif);margin-bottom:1.5rem;}
-        .project-summary{color:var(--text-secondary);font-size:1.2rem;max-width:820px;margin:0 auto 3rem;line-height:1.6;}
-        .project-cover{width:100%;height:60vh;min-height:400px;border-radius:20px;object-fit:cover;object-position:top center;border:1px solid var(--border-glass);box-shadow:0 10px 40px rgba(0,0,0,0.5);}
-        .project-info{padding:60px 0;display:grid;grid-template-columns:2fr 1fr;gap:4rem;}
-        .info-sidebar{background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:20px;padding:2rem;}
-        .tech-tag{background:rgba(0,255,255,0.1);color:var(--accent-cyan);padding:5px 12px;border-radius:15px;font-size:0.8rem;border:1px solid rgba(0,255,255,0.2);margin:2px;display:inline-block;}
-        .project-gallery{padding:60px 0 100px;}
-        .media-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;}
-        .media-card{background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:15px;overflow:hidden;transition:var(--transition-main);}
-        .media-card:hover{transform:translateY(-5px);box-shadow:0 8px 32px 0 var(--accent-blue-glow);}
-        .media-card img{width:100%;height:auto;}
-        .media-caption{padding:1rem 1.5rem;color:var(--text-secondary);font-size:0.9rem;text-align:center;border-top:1px solid var(--border-glass);}
-        @media(max-width:992px){.project-info{grid-template-columns:1fr;}}
-        @media(max-width:576px){.project-cover{height:40vh;min-height:250px;}}
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: var(--font-family-sans);
+            scroll-behavior: smooth;
+            min-height: 100vh;
+        }
+
+        /* Page ambient background lighting - seamless fade */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 900px;
+            background: radial-gradient(ellipse 70% 600px at 50% 150px, var(--accent-blue-glow), transparent 75%);
+            z-index: -1;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition-main);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .ser {
+            font-family: var(--font-family-serif);
+        }
+
+        img,
+        video {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            width: 100%;
+        }
+
+        .text-accent {
+            color: var(--accent-cyan);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 0.9rem 1.8rem;
+            border-radius: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            border: 2px solid var(--text-primary);
+            cursor: pointer;
+            text-align: center;
+            font-family: var(--font-family-sans);
+            transition: var(--transition-main);
+        }
+
+        .btn-primary {
+            background: var(--text-primary);
+            color: var(--bg-dark);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--text-primary);
+            box-shadow: 0 0 20px var(--accent-blue-glow);
+            transform: translateY(-2px);
+        }
+
+        /* --- Navigation --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(3, 5, 30, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-family: var(--font-family-serif);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 35px;
+        }
+
+        .back-btn {
+            border: 1px solid var(--border-glass);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            font-family: var(--font-family-sans);
+        }
+
+        .back-btn:hover {
+            background: var(--text-primary);
+            color: var(--bg-dark);
+        }
+
+        /* --- Project Hero Section --- */
+        .project-hero {
+            padding-top: 140px;
+            padding-bottom: 50px;
+            text-align: center;
+            position: relative;
+        }
+
+        .project-category {
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            background: rgba(0, 255, 255, 0.08);
+            border: 1px solid rgba(0, 255, 255, 0.25);
+            padding: 6px 16px;
+            border-radius: 20px;
+        }
+
+        .project-hero h1 {
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .project-hero .project-subtitle {
+            font-size: clamp(1.15rem, 2.5vw, 1.6rem);
+            color: var(--accent-cyan);
+            font-family: var(--font-family-serif);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .project-summary {
+            color: var(--text-secondary);
+            font-size: 1.15rem;
+            max-width: 840px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.65;
+        }
+
+        /* Main Project Cover */
+        .project-cover {
+            width: 100%;
+            height: 58vh;
+            min-height: 380px;
+            max-height: 620px;
+            border-radius: 20px;
+            object-fit: cover;
+            object-position: top center;
+            border: 1px solid var(--border-glass);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            background: rgba(2, 4, 20, 0.85);
+        }
+
+        /* --- Project Details Info --- */
+        .project-info {
+            padding: 60px 0;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3.5rem;
+        }
+
+        .info-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .info-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+            font-size: 1rem;
+        }
+
+        .role-highlight-box {
+            background: rgba(0, 255, 255, 0.04);
+            border: 1px solid rgba(0, 255, 255, 0.25);
+            border-left: 4px solid var(--accent-cyan);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .role-highlight-box h3 {
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .role-highlight-box h3 i {
+            color: var(--accent-cyan);
+        }
+
+        .role-highlight-box p {
+            margin-bottom: 0.75rem !important;
+            font-size: 0.95rem;
+            line-height: 1.65;
+        }
+
+        .role-highlight-box p:last-child {
+            margin-bottom: 0 !important;
+        }
+
+        .info-sidebar {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 2rem;
+            height: fit-content;
+        }
+
+        .sidebar-item {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-glass);
+            padding-bottom: 1.5rem;
+        }
+
+        .sidebar-item:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .sidebar-item h4 {
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-family-sans);
+            text-transform: uppercase;
+            letter-spacing: 0.75px;
+        }
+
+        .sidebar-item p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .tech-tag {
+            background: rgba(0, 255, 255, 0.08);
+            color: var(--accent-cyan);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        /* --- Capabilities Grid (6 Modules & Core Features) --- */
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+            margin: 1.5rem 0 2.5rem;
+        }
+
+        .capability-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 14px;
+            padding: 1.25rem;
+            transition: var(--transition-main);
+        }
+
+        .capability-card:hover {
+            border-color: rgba(0, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.15);
+        }
+
+        .capability-card h4 {
+            font-family: var(--font-family-sans);
+            font-size: 0.98rem;
+            color: var(--text-primary);
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        .capability-card h4 i {
+            color: var(--accent-cyan);
+            font-size: 0.95rem;
+        }
+
+        .capability-card p {
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            line-height: 1.5;
+            margin-bottom: 0 !important;
+        }
+
+        /* --- Technical Focus Cards --- */
+        .tech-focus-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+        }
+
+        .tech-focus-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-left: 3px solid var(--accent-cyan);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+        }
+
+        .tech-focus-card h4 {
+            font-family: var(--font-family-sans);
+            color: var(--text-primary);
+            font-size: 1.05rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .tech-focus-card p {
+            margin-bottom: 0 !important;
+            font-size: 0.92rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        /* --- Gallery Section --- */
+        .project-gallery {
+            padding: 40px 0 100px;
+        }
+
+        .project-gallery h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-gallery .gallery-intro {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .media-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: var(--transition-main);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .media-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 32px 0 var(--accent-blue-glow);
+        }
+
+        .media-card-img-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: rgba(2, 4, 20, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .media-card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .media-card:hover .media-card-img-wrapper img {
+            transform: scale(1.02);
+        }
+
+        .media-caption {
+            padding: 1rem 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-align: center;
+            border-top: 1px solid var(--border-glass);
+            margin-top: auto;
+            background: rgba(3, 5, 30, 0.4);
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 40px 0;
+            background: var(--bg-dark);
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-glass);
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 992px) {
+            .project-info {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .media-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .capabilities-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding-left: 1.2rem;
+                padding-right: 1.2rem;
+            }
+
+            .project-cover {
+                height: 40vh;
+                min-height: 250px;
+            }
+
+            .project-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .capabilities-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
-<header>
-<div class="container"><a href="../index.html" class="logo"><img src="../assets/Logo.png" alt="Logo">CipherCore<span class="text-accent">.Tech</span></a></div>
-</header>
-<main>
-<section class="project-hero container">
-<span class="project-category">Full-Stack Development · University SE Project</span>
-<h1>Skyline Living Apartment</h1>
-<h2 class="project-subtitle">Apartment Sales & Management System</h2>
-<p class="project-summary">A full‑stack apartment sales and management platform developed as a university Software Engineering group project. The system connects property discovery, viewing appointments, reservations, payments, refunds, and ownership records through dedicated customer, staff, and administrator workflows.</p>
-<img src="../My works/Skyline Living Apartment Sale System/home.png" alt="Skyline Living Apartment Cover" class="project-cover">
-</section>
-<section class="project-info container">
-<div class="info-content">
-<h2>Project <span class="text-accent">Overview</span></h2>
-<p>The Skyline Living Apartment system streamlines the entire lifecycle of apartment sales – from browsing listings to final ownership registration. It supports multi‑module workflows, secure payment processing, and role‑based access for customers, staff, and administrators.</p>
-<h2>My <span class="text-accent">Role & Contribution</span></h2>
-<h3>Assigned Module — Payment & Transaction Management</h3>
-<p>Designed and implemented payment workflows, reservation fee verification, installment handling, transaction records, cancellation refunds, and financial integrity across modules.</p>
-<h3>Broader Contribution — Complete Website Implementation</h3>
-<p>Delivered end‑to‑end UI for customers, staff, admin portals; back‑end services for listings, appointments, reservations, sales; and integration layer tying all modules together.</p>
-</div>
-<aside class="info-sidebar">
-<div class="sidebar-item"><h4>Technologies Used</h4><div>
-<span class="tech-tag">React</span><span class="tech-tag">TypeScript</span><span class="tech-tag">Vite</span><span class="tech-tag">Spring Boot 3.5</span><span class="tech-tag">Java 17</span><span class="tech-tag">SQL Server</span><span class="tech-tag">JWT</span>
-</div></div>
-<div class="sidebar-item"><h4>Source Code</h4><p><a href="https://github.com/Tharushajayod/Skyline-Living-Apartment" target="_blank" class="text-accent">GitHub Repository</a></p></div>
-</aside>
-</section>
-<section class="project-gallery container">
-<h2>Feature Highlights</h2>
-<div class="media-grid">
-<div class="media-card"><img src="../My works/Skyline Living Apartment Sale System/Screenshot 2026-10-04 202118.png" alt="Apartment Listings Overview"><div class="media-caption">Apartment browsing with filtering and detailed property pages</div></div>
-<div class="media-card"><img src="../My works/Skyline Living Apartment Sale System/Screenshot 2026-10-04 205203.png" alt="Viewing Appointment Scheduler"><div class="media-caption">Customer appointment request and staff approval workflow</div></div>
-<div class="media-card"><img src="../My works/Skyline Living Apartment Sale System/Screenshot 2026-10-04 205255.png" alt="Reservation Fee Confirmation"><div class="media-caption">Reservation fee payment and four‑day hold timer</div></div>
-<div class="media-card"><img src="../My works/Skyline Living Apartment Sale System/Screenshot 2026-10-04 205329.png" alt="Full Payment & Installments"><div class="media-caption">Full‑payment and installment options with balance tracking</div></div>
-<div class="media-card"><img src="../My works/Skyline Living Apartment Sale System/Screenshot 2026-10-04 205636.png" alt="Refund Management"><div class="media-caption">Cancellation handling and refund processing linked to transactions</div></div>
-<div class="media-card"><img src="../My works/Skyline Living Apartment Sale System/Screenshot 2026-10-04 205921.png" alt="Sales & Ownership Records"><div class="media-caption">Finalized sales records and ownership association</div></div>
-</div>
-</section>
-</main>
-<footer><div class="container"><p>&copy; 2024 Tharusha Jayod. All Rights Reserved.</p></div></footer>
+
+    <header>
+        <div class="container nav">
+            <a href="../index.html" class="logo"><img src="../assets/Logo.png" alt="CipherCore Tech Logo">
+                CipherCore<span class="text-accent">.Tech</span></a>
+            <a href="../index.html#work" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="project-hero container">
+            <span class="project-category">Full-Stack Development · University SE Group Project</span>
+            <h1>Skyline Living <span class="text-accent">Apartment</span></h1>
+            <div class="project-subtitle">Apartment Sales & Management Web Platform</div>
+            <p class="project-summary">An enterprise-grade apartment sales and property management platform engineered
+                as an academic Software Engineering group project. The system orchestrates property listings, viewing
+                appointments, reservations, multi-stage payments, cancellations, and ownership records across dedicated
+                customer, staff, and admin portals.</p>
+
+            <img src="../My works/Skyline Living Apartment Sale System/home.png" alt="Skyline Living Apartment Cover"
+                class="project-cover" width="1200" height="600">
+        </section>
+
+        <!-- Project Overview & Sidebar -->
+        <section class="project-info container">
+            <div class="info-content">
+                <h2>Project <span class="ser text-accent">Overview</span></h2>
+                <p>Skyline Living Apartment is an integrated web application designed to streamline modern residential
+                    apartment purchasing and property sales administration. In high-value real estate transactions,
+                    prospective buyers require transparent unit availability, convenient inspection appointment booking,
+                    and structured payment schedules, while property management teams require automated reservation
+                    timelines, payment verification, and verified ownership records.</p>
+
+                <p>The application models real-world property transactions end-to-end. Customers browse available
+                    apartment units filtered by tower, bedroom count, price, and floor level. They can schedule guided
+                    viewing appointments with sales agents, place a provisional unit reservation backed by a fee with an
+                    automatic 4-day holding timer, and choose between complete upfront payment or a phased 3-installment
+                    payment schedule.</p>
+
+                <!-- Academic Role & Full Implementation Distinction -->
+                <div class="role-highlight-box">
+                    <h3><i class="fas fa-award"></i> Project Context &amp; Engineering Contributions</h3>
+                    <p><strong>Academic Context:</strong> Developed as a university Software Engineering curriculum
+                        group project modeling enterprise-level multi-module business systems.</p>
+                    <p><strong>Assigned Academic Responsibility:</strong> <em>Payment &amp; Transaction Management</em>
+                        — Architected the financial engine including reservation fee verification, 4-day holding
+                        deadlines, installment schedules, cancellation policies with refund deduction calculations, and
+                        complete audit ledgers.</p>
+                    <p><strong>Overall Implementation Contribution:</strong> Engineered the entire web platform across
+                        frontend and backend, translating all six system modules into a cohesive single-page application
+                        (React, TypeScript, Tailwind) backed by RESTful microservices (Spring Boot 3.5, Java 17, Spring
+                        Security with JWT, Microsoft SQL Server).</p>
+                </div>
+
+                <h2 style="margin-top: 3rem;">Six Core System <span class="ser text-accent">Modules</span></h2>
+                <p>The system was engineered around six interconnected functional modules supporting customer, staff,
+                    and administrative personas:</p>
+
+                <div class="capabilities-grid">
+                    <div class="capability-card">
+                        <h4><i class="fas fa-building"></i> 1. Apartment Listing Management</h4>
+                        <p>Complete property catalog with floor plans, bedroom/bathroom configurations, square footage,
+                            panoramic galleries, pricing, and live availability statuses (Available, Reserved, Sold).
+                        </p>
+                    </div>
+                    <div class="capability-card">
+                        <h4><i class="fas fa-calendar-check"></i> 2. Booking & Viewing Appointments</h4>
+                        <p>Customer appointment scheduler for on-site property walkthroughs with time slot validation,
+                            staff calendar synchronization, and automated confirmation workflows.</p>
+                    </div>
+                    <div class="capability-card">
+                        <h4><i class="fas fa-clock"></i> 3. Reservation Management</h4>
+                        <p>Provisional unit locking upon reservation fee receipt. Enforces a strict 4-day countdown hold
+                            window to secure purchase rights before unit release.</p>
+                    </div>
+                    <div class="capability-card">
+                        <h4><i class="fas fa-credit-card"></i> 4. Payment & Transaction Management</h4>
+                        <p>Financial ledger supporting reservation fees, full settlement, and 3-stage installment
+                            options. Handles payment proof validation, receipts, and refund processing upon
+                            cancellation.</p>
+                    </div>
+                    <div class="capability-card">
+                        <h4><i class="fas fa-file-contract"></i> 5. Sales & Record Management</h4>
+                        <p>Finalized sales contract generation, buyer-to-apartment legal association, permanent deed
+                            records, and staff analytics reporting for apartment turnover.</p>
+                    </div>
+                    <div class="capability-card">
+                        <h4><i class="fas fa-bell"></i> 6. Reviews, Notifications & Inquiries</h4>
+                        <p>Customer inquiry messaging, favorite unit bookmarking, property reviews, and real-time status
+                            notifications for appointment approvals and payment confirmations.</p>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 3rem;">Deep Dive: <span class="ser text-accent">Payment &amp; Transaction
+                        Engine</span></h2>
+                <div class="tech-focus-grid">
+                    <div class="tech-focus-card">
+                        <h4>4-Day Reservation Hold Timer & Status Transitions</h4>
+                        <p>When a buyer reserves a unit, a strict countdown is initiated. The system enforces state
+                            transition integrity: if remaining payments or installments are not initiated within the
+                            4-day deadline, the unit status automatically reverts to 'Available', preventing artificial
+                            property lockouts.</p>
+                    </div>
+                    <div class="tech-focus-card">
+                        <h4>Flexible Payment Plans: Full & 3-Stage Installments</h4>
+                        <p>Buyers can complete the purchase via full upfront settlement or an installment schedule
+                            divided across project milestones (Down payment, Intermediate build stage, and Final
+                            handover). Each installment tracks balance remaining, due dates, and payment receipts.</p>
+                    </div>
+                    <div class="tech-focus-card">
+                        <h4>Cancellation Governance & Refund Management</h4>
+                        <p>If a buyer withdraws from a reserved or in-progress purchase, the transaction engine applies
+                            automated business logic to compute allowable refunds, deduct cancellation administrative
+                            fees, update bank payout records, and restore unit availability.</p>
+                    </div>
+                    <div class="tech-focus-card">
+                        <h4>Security & Financial Audit Trail</h4>
+                        <p>Protected by Spring Security and JWT authentication. Every payment record, slip upload, and
+                            refund disbursement creates an immutable audit entry tied to user IDs and timestamped
+                            database rows in MS SQL Server.</p>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="info-sidebar">
+                <div class="sidebar-item">
+                    <h4>Project Type</h4>
+                    <p>University SE Group Project</p>
+                </div>
+                <div class="sidebar-item">
+                    <h4>Assigned Module</h4>
+                    <p>Payment &amp; Transaction Management</p>
+                </div>
+                <div class="sidebar-item">
+                    <h4>Implementation</h4>
+                    <p>Full Website (Frontend, Backend, Integration)</p>
+                </div>
+                <div class="sidebar-item">
+                    <h4>Technologies Used</h4>
+                    <div class="tech-tags">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">TypeScript</span>
+                        <span class="tech-tag">Vite</span>
+                        <span class="tech-tag">Tailwind CSS</span>
+                        <span class="tech-tag">Spring Boot 3.5</span>
+                        <span class="tech-tag">Java 17</span>
+                        <span class="tech-tag">Spring Security</span>
+                        <span class="tech-tag">JWT</span>
+                        <span class="tech-tag">MS SQL Server</span>
+                    </div>
+                </div>
+                <div class="sidebar-item">
+                    <h4>Source Repository</h4>
+                    <p><a href="https://github.com/Tharushajayod/Skyline-Living-Apartment" target="_blank"
+                            rel="noopener noreferrer" class="text-accent"
+                            style="display:inline-flex; align-items:center; gap:6px;"><i class="fab fa-github"></i>
+                            GitHub Repository <i class="fas fa-external-link-alt" style="font-size:0.75rem;"></i></a>
+                    </p>
+                </div>
+                <div class="sidebar-item" style="margin-top: 1rem;">
+                    <a href="https://github.com/Tharushajayod/Skyline-Living-Apartment" target="_blank"
+                        rel="noopener noreferrer" class="btn btn-primary" style="width: 100%;">View Code on GitHub <i
+                            class="fab fa-github"></i></a>
+                </div>
+            </aside>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="project-gallery container">
+            <h2>System <span class="ser text-accent">Screenshots</span></h2>
+            <p class="gallery-intro">Interface previews from the Skyline Living Apartment application demonstrating
+                property discovery, reservation workflows, payment gateways, and administrative consoles.</p>
+
+            <div class="media-grid">
+                <div class="media-card">
+                    <div class="media-card-img-wrapper">
+                        <img src="../My works/Skyline Living Apartment Sale System/Screenshot 2026-10-04 202118.png"
+                            alt="Apartment Listings & Filter Catalog" loading="lazy" width="800" height="450">
+                    </div>
+                    <div class="media-caption">Apartment Listings Catalog with Tower, Floor & Bedroom Filtering</div>
+                </div>
+
+                <div class="media-card">
+                    <div class="media-card-img-wrapper">
+                        <img src="../My works/Skyline Living Apartment Sale System/Screenshot 2026-10-04 205203.png"
+                            alt="Viewing Appointment Management Interface" loading="lazy" width="800" height="450">
+                    </div>
+                    <div class="media-caption">Viewing Appointment Scheduler with Agent Time Slot Synchronization</div>
+                </div>
+
+                <div class="media-card">
+                    <div class="media-card-img-wrapper">
+                        <img src="../My works/Skyline Living Apartment Sale System/Screenshot 2026-10-04 205255.png"
+                            alt="Provisional Unit Reservation and Fee Confirmation" loading="lazy" width="800"
+                            height="450">
+                    </div>
+                    <div class="media-caption">Provisional Unit Reservation with 4-Day Holding Window Countdown</div>
+                </div>
+
+                <div class="media-card">
+                    <div class="media-card-img-wrapper">
+                        <img src="../My works/Skyline Living Apartment Sale System/Screenshot 2026-10-04 205329.png"
+                            alt="Payment & Transaction Management - Installment Plan" loading="lazy" width="800"
+                            height="450">
+                    </div>
+                    <div class="media-caption">Payment & Transaction Engine: Full Settlement & 3-Stage Milestone
+                        Installments</div>
+                </div>
+
+                <div class="media-card">
+                    <div class="media-card-img-wrapper">
+                        <img src="../My works/Skyline Living Apartment Sale System/Screenshot 2026-10-04 205636.png"
+                            alt="Cancellation Handling and Refund Management" loading="lazy" width="800" height="450">
+                    </div>
+                    <div class="media-caption">Cancellation Processing &amp; Refund Deduction Computation</div>
+                </div>
+
+                <div class="media-card">
+                    <div class="media-card-img-wrapper">
+                        <img src="../My works/Skyline Living Apartment Sale System/Screenshot 2026-10-04 205921.png"
+                            alt="Sales and Ownership Records Management" loading="lazy" width="800" height="450">
+                    </div>
+                    <div class="media-caption">Finalized Sales Records and Customer Property Ownership Registration
+                    </div>
+                </div>
+
+                <div class="media-card">
+                    <div class="media-card-img-wrapper">
+                        <img src="../My works/Skyline Living Apartment Sale System/Screenshot 2026-10-04 210040.png"
+                            alt="Administrative Unit & Pricing Configuration" loading="lazy" width="800" height="450">
+                    </div>
+                    <div class="media-caption">Staff Admin Dashboard: Unit Status &amp; Pricing Management</div>
+                </div>
+
+                <div class="media-card">
+                    <div class="media-card-img-wrapper">
+                        <img src="../My works/Skyline Living Apartment Sale System/Screenshot 2026-10-04 210220.png"
+                            alt="Customer Reviews, Inquiries & Notifications" loading="lazy" width="800" height="450">
+                    </div>
+                    <div class="media-caption">Customer Inquiries, Unit Reviews &amp; Status Notification Hub</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Tharusha Jayod. All Rights Reserved. </p>
+        </div>
+    </footer>
+
 </body>
+
 </html>

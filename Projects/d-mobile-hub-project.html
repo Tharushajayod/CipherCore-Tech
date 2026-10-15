@@ -1,41 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Case study of D Mobile Hub - A full-stack smartphone and accessories e-commerce platform built for a retailer in Galle, Sri Lanka. Features variant inventory, secure checkout, and order tracking.">
+    <meta name="description"
+        content="Case study of D Mobile Hub - A full-stack smartphone and accessories e-commerce platform built for a retailer in Galle, Sri Lanka. Features variant inventory, secure checkout, and order tracking.">
     <title>D Mobile Hub | Tharusha Jayod</title>
-    
+
     <link rel="icon" href="../assets/Logo.png" type="image/png">
-    
+
     <style>
         /* --- Core Theme Variables (Same as Main Page) --- */
         :root {
-            --bg-dark: #03051e; 
-            --bg-glass: rgba(255, 255, 255, 0.05); 
+            --bg-dark: #03051e;
+            --bg-glass: rgba(255, 255, 255, 0.05);
             --border-glass: rgba(255, 255, 255, 0.1);
-            --accent-cyan: #0ff; 
+            --accent-cyan: #0ff;
             --accent-blue-glow: rgba(0, 102, 255, 0.4);
             --text-primary: #fff;
             --text-secondary: #b0c4de;
             --transition-main: all 0.3s ease;
-            --font-family-sans: 'Space Grotesk', sans-serif; 
-            --font-family-serif: 'Playfair Display', serif; 
+            --font-family-sans: 'Space Grotesk', sans-serif;
+            --font-family-serif: 'Playfair Display', serif;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body { overflow-x: hidden; width: 100%; position: relative; }
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
         body {
             background-color: var(--bg-dark);
             color: var(--text-primary);
             font-family: var(--font-family-sans);
             scroll-behavior: smooth;
+            min-height: 100vh;
         }
 
-        a { text-decoration: none; color: inherit; transition: var(--transition-main); }
-        h1, h2, h3, h4, .ser { font-family: var(--font-family-serif); }
-        img, video { max-width: 100%; height: auto; display: block; }
+        /* Page ambient background lighting - seamless fade */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 900px;
+            background: radial-gradient(ellipse 70% 600px at 50% 150px, var(--accent-blue-glow), transparent 75%);
+            z-index: -1;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition-main);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .ser {
+            font-family: var(--font-family-serif);
+        }
+
+        img,
+        video {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
 
         .container {
             max-width: 1200px;
@@ -45,7 +89,9 @@
             width: 100%;
         }
 
-        .text-accent { color: var(--accent-cyan); }
+        .text-accent {
+            color: var(--accent-cyan);
+        }
 
         .btn {
             display: inline-flex;
@@ -76,18 +122,39 @@
             box-shadow: 0 0 20px var(--accent-blue-glow);
             transform: translateY(-2px);
         }
-        
+
         /* --- Custom Navbar for Project Page --- */
         header {
             position: fixed;
-            top: 0; left: 0; width: 100%; z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
             background: rgba(3, 5, 30, 0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-glass);
         }
-        .nav { display: flex; justify-content: space-between; align-items: center; height: 80px; }
-        .logo { font-size: 1.5rem; font-weight: bold; font-family: var(--font-family-serif); display: flex; align-items: center; gap: 10px; }
-        .logo img { height: 35px; }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-family: var(--font-family-serif);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 35px;
+        }
+
         .back-btn {
             border: 1px solid var(--border-glass);
             padding: 0.5rem 1.5rem;
@@ -98,7 +165,11 @@
             font-size: 0.9rem;
             font-family: var(--font-family-sans);
         }
-        .back-btn:hover { background: var(--text-primary); color: var(--bg-dark); }
+
+        .back-btn:hover {
+            background: var(--text-primary);
+            color: var(--bg-dark);
+        }
 
         /* --- Project Hero Section --- */
         .project-hero {
@@ -107,15 +178,47 @@
             text-align: center;
             position: relative;
         }
+
         .project-hero::before {
-            content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-            width: 80%; height: 100%; background: radial-gradient(circle at top, var(--accent-blue-glow), transparent 70%);
-            z-index: -1; opacity: 0.5;
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 100%;
+            background: radial-gradient(circle at top, var(--accent-blue-glow), transparent 70%);
+            z-index: -1;
+            opacity: 0.5;
         }
-        .project-category { color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 1rem; display: block; }
-        .project-hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 0.5rem; }
-        .project-hero .project-subtitle { font-size: clamp(1.2rem, 3vw, 1.8rem); color: var(--accent-cyan); font-family: var(--font-family-serif); margin-bottom: 1.5rem; }
-        .project-summary { color: var(--text-secondary); font-size: 1.2rem; max-width: 820px; margin: 0 auto 3rem; line-height: 1.6; }
+
+        .project-category {
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .project-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-hero .project-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--accent-cyan);
+            font-family: var(--font-family-serif);
+            margin-bottom: 1.5rem;
+        }
+
+        .project-summary {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            max-width: 820px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+        }
 
         /* Main Project Cover */
         .project-cover {
@@ -126,7 +229,7 @@
             object-fit: cover;
             object-position: top center;
             border: 1px solid var(--border-glass);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
         }
 
         /* --- Project Details Info --- */
@@ -136,9 +239,18 @@
             grid-template-columns: 2fr 1fr;
             gap: 4rem;
         }
-        .info-content h2 { font-size: 2rem; margin-bottom: 1.5rem; }
-        .info-content p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem; }
-        
+
+        .info-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
         .info-sidebar {
             background: var(--bg-glass);
             border: 1px solid var(--border-glass);
@@ -146,12 +258,49 @@
             padding: 2rem;
             height: fit-content;
         }
-        .sidebar-item { margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-glass); padding-bottom: 1.5rem; }
-        .sidebar-item:last-child { margin-bottom: 0; border-bottom: none; padding-bottom: 0; }
-        .sidebar-item h4 { color: var(--text-primary); font-size: 1.1rem; margin-bottom: 0.5rem; font-family: var(--font-family-sans); text-transform: uppercase; letter-spacing: 0.5px; }
-        .sidebar-item p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5; }
-        .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-        .tech-tag { background: rgba(0, 255, 255, 0.1); color: var(--accent-cyan); padding: 5px 12px; border-radius: 15px; font-size: 0.8rem; border: 1px solid rgba(0, 255, 255, 0.2); }
+
+        .sidebar-item {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-glass);
+            padding-bottom: 1.5rem;
+        }
+
+        .sidebar-item:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .sidebar-item h4 {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-family-sans);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-item p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .tech-tag {
+            background: rgba(0, 255, 255, 0.1);
+            color: var(--accent-cyan);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
 
         /* --- Capabilities Grid --- */
         .capabilities-grid {
@@ -160,6 +309,7 @@
             gap: 1.25rem;
             margin: 1.5rem 0 2.5rem;
         }
+
         .capability-card {
             background: var(--bg-glass);
             border: 1px solid var(--border-glass);
@@ -167,11 +317,13 @@
             padding: 1.25rem;
             transition: var(--transition-main);
         }
+
         .capability-card:hover {
             border-color: rgba(0, 255, 255, 0.3);
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(0, 102, 255, 0.15);
         }
+
         .capability-card h4 {
             font-family: var(--font-family-sans);
             font-size: 0.95rem;
@@ -183,10 +335,12 @@
             text-transform: none;
             letter-spacing: 0;
         }
+
         .capability-card h4 i {
             color: var(--accent-cyan);
             font-size: 0.9rem;
         }
+
         .capability-card p {
             color: var(--text-secondary);
             font-size: 0.88rem;
@@ -201,6 +355,7 @@
             gap: 1.25rem;
             margin-top: 1.5rem;
         }
+
         .tech-focus-card {
             background: var(--bg-glass);
             border: 1px solid var(--border-glass);
@@ -208,12 +363,14 @@
             border-radius: 12px;
             padding: 1.25rem 1.5rem;
         }
+
         .tech-focus-card h4 {
             font-family: var(--font-family-sans);
             color: var(--text-primary);
             font-size: 1.05rem;
             margin-bottom: 0.4rem;
         }
+
         .tech-focus-card p {
             margin-bottom: 0 !important;
             font-size: 0.92rem;
@@ -222,8 +379,16 @@
         }
 
         /* --- Gallery Section --- */
-        .project-gallery { padding: 60px 0 100px; }
-        .project-gallery h2 { font-size: 2.5rem; text-align: center; margin-bottom: 1rem; }
+        .project-gallery {
+            padding: 60px 0 100px;
+        }
+
+        .project-gallery h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
         .project-gallery .gallery-intro {
             text-align: center;
             color: var(--text-secondary);
@@ -232,13 +397,13 @@
             margin: 0 auto 3rem;
             line-height: 1.6;
         }
-        
+
         .media-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
         }
-        
+
         .media-card {
             background: var(--bg-glass);
             border: 1px solid var(--border-glass);
@@ -248,7 +413,12 @@
             display: flex;
             flex-direction: column;
         }
-        .media-card:hover { transform: translateY(-5px); box-shadow: 0 8px 32px 0 var(--accent-blue-glow); }
+
+        .media-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 32px 0 var(--accent-blue-glow);
+        }
+
         .media-card-img-wrapper {
             position: relative;
             width: 100%;
@@ -259,6 +429,7 @@
             justify-content: center;
             overflow: hidden;
         }
+
         .media-card-img-wrapper img {
             width: 100%;
             height: 100%;
@@ -266,9 +437,11 @@
             display: block;
             transition: transform 0.4s ease;
         }
+
         .media-card:hover .media-card-img-wrapper img {
             transform: scale(1.02);
         }
+
         .media-caption {
             padding: 1rem 1.5rem;
             color: var(--text-secondary);
@@ -280,29 +453,63 @@
         }
 
         /* --- Footer --- */
-        footer { padding: 40px 0; background: var(--bg-dark); text-align: center; font-size: 0.9rem; color: var(--text-secondary); border-top: 1px solid var(--border-glass); }
+        footer {
+            padding: 40px 0;
+            background: var(--bg-dark);
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-glass);
+        }
 
         /* --- Responsive --- */
         @media (max-width: 992px) {
-            .project-info { grid-template-columns: 1fr; gap: 3rem; }
-            .media-grid { grid-template-columns: 1fr; }
-            .capabilities-grid { grid-template-columns: 1fr; }
+            .project-info {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .media-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .capabilities-grid {
+                grid-template-columns: 1fr;
+            }
         }
+
         @media (max-width: 576px) {
-            .container { padding-left: 1.2rem; padding-right: 1.2rem; }
-            .project-cover { height: 40vh; min-height: 250px; }
-            .project-hero h1 { font-size: 2.2rem; }
-            .capabilities-grid { grid-template-columns: 1fr; }
+            .container {
+                padding-left: 1.2rem;
+                padding-right: 1.2rem;
+            }
+
+            .project-cover {
+                height: 40vh;
+                min-height: 250px;
+            }
+
+            .project-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .capabilities-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
 
     <header>
         <div class="container nav">
-            <a href="../index.html" class="logo"><img src="../assets/Logo.png" alt="CipherCore Tech Logo"> CipherCore<span class="text-accent">.Tech</span></a>
+            <a href="../index.html" class="logo"><img src="../assets/Logo.png" alt="CipherCore Tech Logo">
+                CipherCore<span class="text-accent">.Tech</span></a>
             <a href="../index.html#work" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
         </div>
     </header>
@@ -312,71 +519,104 @@
             <span class="project-category">Full-Stack E-Commerce Development</span>
             <h1>D Mobile <span class="text-accent">Hub</span></h1>
             <div class="project-subtitle">Smartphone & Accessories E-Commerce Platform</div>
-            <p class="project-summary">An e-commerce platform built for a phone and accessories retailer in Galle, Sri Lanka. It combines a responsive shopping experience with tools for managing products, inventory, promotions, payments, and customer orders.</p>
-            
-            <img src="../My works/D Mobile Hub/home.png" alt="D Mobile Hub Storefront Platform Cover" class="project-cover" width="1200" height="600">
+            <p class="project-summary">An e-commerce platform built for a phone and accessories retailer in Galle, Sri
+                Lanka. It combines a responsive shopping experience with tools for managing products, inventory,
+                promotions, payments, and customer orders.</p>
+
+            <img src="../My works/D Mobile Hub/home.png" alt="D Mobile Hub Storefront Platform Cover"
+                class="project-cover" width="1200" height="600">
         </section>
 
         <section class="project-info container">
             <div class="info-content">
                 <h2>Project <span class="ser text-accent">Overview</span></h2>
-                <p>D Mobile Hub is an end-to-end digital retail platform engineered for a phone and accessories retailer located in Galle, Sri Lanka. The project brings the full retail shopping experience into a responsive, high-performance web platform designed around regional customer preferences, device variant needs, and flexible fulfillment workflows.</p>
-                
-                <p>The customer journey begins on the storefront catalog where shoppers browse smartphones and accessories with instant search autocomplete and fine-grained filters for brand, memory (RAM), internal storage capacity, and price range. When viewing a specific product, customers can configure options across RAM, storage, and colorways with live stock status indicators, warranty badges, and dynamic price adjustments. Shoppers can authenticate using email and password or Google sign-in, while maintaining an active shopping cart across devices.</p>
+                <p>D Mobile Hub is an end-to-end digital retail platform engineered for a phone and accessories retailer
+                    located in Galle, Sri Lanka. The project brings the full retail shopping experience into a
+                    responsive, high-performance web platform designed around regional customer preferences, device
+                    variant needs, and flexible fulfillment workflows.</p>
 
-                <p>During checkout, buyers select between in-store pickup at the Galle showroom or courier delivery across Sri Lanka. To support local purchasing habits, checkout accommodates direct bank transfer with receipt slip uploads for verification, as well as Cash on Delivery (COD) configured with an advance payment requirement to reduce delivery cancellation risks. After placing an order, customers receive downloadable PDF invoices with full warranty terms, monitor progress through a live status timeline (Order Placed, Payment Confirmed, Processing, Out for Delivery, Delivered), and leave verified-purchase reviews once received.</p>
+                <p>The customer journey begins on the storefront catalog where shoppers browse smartphones and
+                    accessories with instant search autocomplete and fine-grained filters for brand, memory (RAM),
+                    internal storage capacity, and price range. When viewing a specific product, customers can configure
+                    options across RAM, storage, and colorways with live stock status indicators, warranty badges, and
+                    dynamic price adjustments. Shoppers can authenticate using email and password or Google sign-in,
+                    while maintaining an active shopping cart across devices.</p>
 
-                <p>On the administrative side, store operators and sellers access a back-office operations suite. The management interface facilitates daily retail tasks including tracking orders, adjusting variant inventory thresholds, auditing bank payment slips, scheduling product-specific promotional coupon codes, and monitoring financial reporting metrics such as net revenue, gross profit, and fulfillment breakdowns.</p>
+                <p>During checkout, buyers select between in-store pickup at the Galle showroom or courier delivery
+                    across Sri Lanka. To support local purchasing habits, checkout accommodates direct bank transfer
+                    with receipt slip uploads for verification, as well as Cash on Delivery (COD) configured with an
+                    advance payment requirement to reduce delivery cancellation risks. After placing an order, customers
+                    receive downloadable PDF invoices with full warranty terms, monitor progress through a live status
+                    timeline (Order Placed, Payment Confirmed, Processing, Out for Delivery, Delivered), and leave
+                    verified-purchase reviews once received.</p>
+
+                <p>On the administrative side, store operators and sellers access a back-office operations suite. The
+                    management interface facilitates daily retail tasks including tracking orders, adjusting variant
+                    inventory thresholds, auditing bank payment slips, scheduling product-specific promotional coupon
+                    codes, and monitoring financial reporting metrics such as net revenue, gross profit, and fulfillment
+                    breakdowns.</p>
 
                 <h2 style="margin-top: 3rem;">Key <span class="ser text-accent">Capabilities</span></h2>
                 <div class="capabilities-grid">
                     <div class="capability-card">
                         <h4><i class="fas fa-mobile-alt"></i> Variant Catalog & Pricing</h4>
-                        <p>Smartphones and accessories catalog with dynamic RAM, storage, color selection, and real-time variant pricing.</p>
+                        <p>Smartphones and accessories catalog with dynamic RAM, storage, color selection, and real-time
+                            variant pricing.</p>
                     </div>
                     <div class="capability-card">
                         <h4><i class="fas fa-search"></i> Product Search & Browsing</h4>
-                        <p>Real-time product search with live autocomplete suggestions, brand filters, specification selectors, and price range sliders.</p>
+                        <p>Real-time product search with live autocomplete suggestions, brand filters, specification
+                            selectors, and price range sliders.</p>
                     </div>
                     <div class="capability-card">
                         <h4><i class="fas fa-user-shield"></i> Customer Accounts</h4>
-                        <p>User profile management featuring secure email/password registration and Google OAuth sign-in.</p>
+                        <p>User profile management featuring secure email/password registration and Google OAuth
+                            sign-in.</p>
                     </div>
                     <div class="capability-card">
                         <h4><i class="fas fa-shopping-bag"></i> Cart & Checkout</h4>
-                        <p>Slide-out responsive shopping cart drawer with instant quantity controls, promotional code input, and live order subtotal calculation.</p>
+                        <p>Slide-out responsive shopping cart drawer with instant quantity controls, promotional code
+                            input, and live order subtotal calculation.</p>
                     </div>
                     <div class="capability-card">
                         <h4><i class="fas fa-receipt"></i> Bank Transfer Payment Proof</h4>
-                        <p>Direct bank transfer payment submission enabling customers to upload transaction slips for back-office verification.</p>
+                        <p>Direct bank transfer payment submission enabling customers to upload transaction slips for
+                            back-office verification.</p>
                     </div>
                     <div class="capability-card">
                         <h4><i class="fas fa-hand-holding-usd"></i> COD with Advance Payment</h4>
-                        <p>Cash on Delivery fulfillment supported with a structured advance payment requirement to safeguard against uncollected orders.</p>
+                        <p>Cash on Delivery fulfillment supported with a structured advance payment requirement to
+                            safeguard against uncollected orders.</p>
                     </div>
                     <div class="capability-card">
                         <h4><i class="fas fa-truck"></i> Pickup & Delivery Options</h4>
-                        <p>Fulfillment flexibility offering local showroom pickup in Galle alongside door-to-door courier delivery across Sri Lanka.</p>
+                        <p>Fulfillment flexibility offering local showroom pickup in Galle alongside door-to-door
+                            courier delivery across Sri Lanka.</p>
                     </div>
                     <div class="capability-card">
                         <h4><i class="fas fa-route"></i> Order & Shipment Tracking</h4>
-                        <p>Live progress tracking milestone timeline guiding customers from order placement to final delivery.</p>
+                        <p>Live progress tracking milestone timeline guiding customers from order placement to final
+                            delivery.</p>
                     </div>
                     <div class="capability-card">
                         <h4><i class="fas fa-file-invoice"></i> Downloadable PDF Receipts</h4>
-                        <p>Formatted PDF receipts and invoices containing line items, chosen specifications, and warranty details.</p>
+                        <p>Formatted PDF receipts and invoices containing line items, chosen specifications, and
+                            warranty details.</p>
                     </div>
                     <div class="capability-card">
                         <h4><i class="fas fa-star"></i> Verified-Purchase Reviews</h4>
-                        <p>Customer feedback mechanism requiring confirmed buyer authentication before submitting ratings and reviews.</p>
+                        <p>Customer feedback mechanism requiring confirmed buyer authentication before submitting
+                            ratings and reviews.</p>
                     </div>
                     <div class="capability-card">
                         <h4><i class="fas fa-tags"></i> Product-Specific Promo Codes</h4>
-                        <p>Promotional engine supporting targeted coupon discounts validated against eligible product categories.</p>
+                        <p>Promotional engine supporting targeted coupon discounts validated against eligible product
+                            categories.</p>
                     </div>
                     <div class="capability-card">
                         <h4><i class="fas fa-cogs"></i> Admin & Seller Interfaces</h4>
-                        <p>Back-office control panel for managing products, inventory thresholds, order statuses, payment approvals, and promotions.</p>
+                        <p>Back-office control panel for managing products, inventory thresholds, order statuses,
+                            payment approvals, and promotions.</p>
                     </div>
                 </div>
 
@@ -384,23 +624,34 @@
                 <div class="tech-focus-grid">
                     <div class="tech-focus-card">
                         <h4>Variant Stock Integrity</h4>
-                        <p>Handling consumer electronics with multiple specifications (RAM, internal storage, colorways) requires discrete SKU stock tracking. The data model decouples parent product metadata from individual variant stock units, preventing race conditions and overselling across high-demand variants.</p>
+                        <p>Handling consumer electronics with multiple specifications (RAM, internal storage, colorways)
+                            requires discrete SKU stock tracking. The data model decouples parent product metadata from
+                            individual variant stock units, preventing race conditions and overselling across
+                            high-demand variants.</p>
                     </div>
                     <div class="tech-focus-card">
                         <h4>Checkout & Order Consistency</h4>
-                        <p>To support asynchronous payment methods like bank slip verification and COD advances, order progression is governed by strict state transitions. This guarantees that customer carts, invoice records, inventory reservations, and customer notification statuses remain synchronized across database operations.</p>
+                        <p>To support asynchronous payment methods like bank slip verification and COD advances, order
+                            progression is governed by strict state transitions. This guarantees that customer carts,
+                            invoice records, inventory reservations, and customer notification statuses remain
+                            synchronized across database operations.</p>
                     </div>
                     <div class="tech-focus-card">
                         <h4>Role-Based Access Control</h4>
-                        <p>Store administrative routes (`/admin`) and operational endpoints are strictly segregated from customer accounts. Supabase authentication combined with PostgreSQL Row-Level Security (RLS) ensures that privileged operations—such as approving payment slips, adjusting stock thresholds, and configuring promotions—are restricted to verified staff.</p>
+                        <p>Store administrative routes (`/admin`) and operational endpoints are strictly segregated from
+                            customer accounts. Supabase authentication combined with PostgreSQL Row-Level Security (RLS)
+                            ensures that privileged operations—such as approving payment slips, adjusting stock
+                            thresholds, and configuring promotions—are restricted to verified staff.</p>
                     </div>
                     <div class="tech-focus-card">
                         <h4>Targeted Promotion Validation</h4>
-                        <p>Promotional codes are validated at the line-item level rather than as generic cart discounts. The discount logic verifies coupon eligibility against specific device models or categories, ensuring store margins remain protected during mixed-cart checkouts.</p>
+                        <p>Promotional codes are validated at the line-item level rather than as generic cart discounts.
+                            The discount logic verifies coupon eligibility against specific device models or categories,
+                            ensuring store margins remain protected during mixed-cart checkouts.</p>
                     </div>
                 </div>
             </div>
-            
+
             <aside class="info-sidebar">
                 <div class="sidebar-item">
                     <h4>Project Type</h4>
@@ -426,68 +677,85 @@
                     </div>
                 </div>
                 <div class="sidebar-item" style="margin-top: 1rem;">
-                    <a href="https://dmobilehub.netlify.app/" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%;">Visit Website <i class="fas fa-external-link-alt"></i></a>
+                    <a href="https://dmobilehub.netlify.app/" target="_blank" rel="noopener noreferrer"
+                        class="btn btn-primary" style="width: 100%;">Visit Website <i
+                            class="fas fa-external-link-alt"></i></a>
                 </div>
             </aside>
         </section>
 
         <section class="project-gallery container">
             <h2>System <span class="ser text-accent">Screenshots</span></h2>
-            <p class="gallery-intro">Interface previews from the live D Mobile Hub platform illustrating the storefront, customer journey, and back-office management interfaces.</p>
-            
+            <p class="gallery-intro">Interface previews from the live D Mobile Hub platform illustrating the storefront,
+                customer journey, and back-office management interfaces.</p>
+
             <div class="media-grid">
                 <div class="media-card">
                     <div class="media-card-img-wrapper">
-                        <img src="../My works/D Mobile Hub/Screenshot 2026-10-15 170833.png" alt="Smartphones Catalog with Multi-Attribute Filters" loading="lazy" width="800" height="450">
+                        <img src="../My works/D Mobile Hub/Screenshot 2026-10-15 170833.png"
+                            alt="Smartphones Catalog with Multi-Attribute Filters" loading="lazy" width="800"
+                            height="450">
                     </div>
                     <div class="media-caption">Smartphones Catalog with Dynamic Specification Filters</div>
                 </div>
-                
+
                 <div class="media-card">
                     <div class="media-card-img-wrapper">
-                        <img src="../My works/D Mobile Hub/Screenshot 2026-10-15 171808.png" alt="Product Detail View with RAM, Storage & Color Variant Selection" loading="lazy" width="800" height="450">
+                        <img src="../My works/D Mobile Hub/Screenshot 2026-10-15 171808.png"
+                            alt="Product Detail View with RAM, Storage & Color Variant Selection" loading="lazy"
+                            width="800" height="450">
                     </div>
                     <div class="media-caption">Product Detail View with Variant Selectors & Stock Status</div>
                 </div>
 
                 <div class="media-card">
                     <div class="media-card-img-wrapper">
-                        <img src="../My works/D Mobile Hub/Screenshot 2026-10-15 170957.png" alt="Live Order Tracking Timeline & Slide-Out Shopping Cart" loading="lazy" width="800" height="450">
+                        <img src="../My works/D Mobile Hub/Screenshot 2026-10-15 170957.png"
+                            alt="Live Order Tracking Timeline & Slide-Out Shopping Cart" loading="lazy" width="800"
+                            height="450">
                     </div>
                     <div class="media-caption">Live Order Status Timeline & Slide-Out Shopping Cart</div>
                 </div>
 
                 <div class="media-card">
                     <div class="media-card-img-wrapper">
-                        <img src="../My works/D Mobile Hub/Screenshot 2026-10-15 171457.png" alt="Storefront Real-Time Search Autocomplete" loading="lazy" width="800" height="450">
+                        <img src="../My works/D Mobile Hub/Screenshot 2026-10-15 171457.png"
+                            alt="Storefront Real-Time Search Autocomplete" loading="lazy" width="800" height="450">
                     </div>
                     <div class="media-caption">Storefront Real-Time Search with Live Suggestions</div>
                 </div>
 
                 <div class="media-card">
                     <div class="media-card-img-wrapper">
-                        <img src="../My works/D Mobile Hub/Screenshot 2026-10-15 170654.png" alt="Back Office Operations Dashboard & Low Stock Alerts" loading="lazy" width="800" height="450">
+                        <img src="../My works/D Mobile Hub/Screenshot 2026-10-15 170654.png"
+                            alt="Back Office Operations Dashboard & Low Stock Alerts" loading="lazy" width="800"
+                            height="450">
                     </div>
                     <div class="media-caption">Back Office Operations Dashboard & Low Stock Alerts</div>
                 </div>
 
                 <div class="media-card">
                     <div class="media-card-img-wrapper">
-                        <img src="../My works/D Mobile Hub/Screenshot 2026-10-15 170739.png" alt="Financial Analytics, Gross Profit & Fulfillment Reports" loading="lazy" width="800" height="450">
+                        <img src="../My works/D Mobile Hub/Screenshot 2026-10-15 170739.png"
+                            alt="Financial Analytics, Gross Profit & Fulfillment Reports" loading="lazy" width="800"
+                            height="450">
                     </div>
                     <div class="media-caption">Sales Analytics, Gross Profit Tracking & Fulfillment Reports</div>
                 </div>
 
                 <div class="media-card">
                     <div class="media-card-img-wrapper">
-                        <img src="../My works/D Mobile Hub/Screenshot 2026-10-15 171517.png" alt="Customer Notification Center with Order Alerts" loading="lazy" width="800" height="450">
+                        <img src="../My works/D Mobile Hub/Screenshot 2026-10-15 171517.png"
+                            alt="Customer Notification Center with Order Alerts" loading="lazy" width="800"
+                            height="450">
                     </div>
                     <div class="media-caption">Customer Notification Center with Order & Payment Alerts</div>
                 </div>
 
                 <div class="media-card">
                     <div class="media-card-img-wrapper">
-                        <img src="../My works/D Mobile Hub/Screenshot 2026-10-15 171528.png" alt="Customer Feedback & Verified-Buyer Reviews" loading="lazy" width="800" height="450">
+                        <img src="../My works/D Mobile Hub/Screenshot 2026-10-15 171528.png"
+                            alt="Customer Feedback & Verified-Buyer Reviews" loading="lazy" width="800" height="450">
                     </div>
                     <div class="media-caption">Verified-Buyer Product Reviews & Rating Distribution</div>
                 </div>
@@ -502,4 +770,5 @@
     </footer>
 
 </body>
+
 </html>
